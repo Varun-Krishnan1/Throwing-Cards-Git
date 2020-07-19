@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TriggerDialogue : MonoBehaviour
 {
+
+    [TextArea(3,10)]
     public string playbackSentence; 
     private bool notHitPlayer = true; // -- have to add flag because capsule collider can contact twice! 
     
