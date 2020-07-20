@@ -226,6 +226,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -360
       objectReference: {fileID: 0}
+    - target: {fileID: 1324495787, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 60546e098b515794c9f27b427b7404a1, type: 2}
+    - target: {fileID: 1324495791, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
+      propertyPath: m_CrouchSpeed
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 1928461558, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.00000065565104
@@ -364,7 +372,8 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.28503528
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1324495790, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
 --- !u!4 &394820369 stripped
 Transform:
@@ -21958,7 +21967,7 @@ GameObject:
   - component: {fileID: 2097005294}
   - component: {fileID: 2097005296}
   - component: {fileID: 2097005295}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tilemap_Inside
   m_TagString: Untagged
   m_Icon: {fileID: 0}

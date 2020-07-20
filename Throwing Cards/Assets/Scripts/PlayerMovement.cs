@@ -55,11 +55,6 @@ public class PlayerMovement : MonoBehaviour
             crouch = false;
     }
 
-    public void OnLanding()
-    {
-        animator.SetBool("isJumping", false);
-    }
-
     public void BufferedJump()
     {
         if (fJumpPressedRemember > 0)
