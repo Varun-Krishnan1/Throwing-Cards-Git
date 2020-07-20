@@ -18,6 +18,9 @@ public class Controller2D : MonoBehaviour
 	[SerializeField] private Transform m_GroundCheck;					   // A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
 	[SerializeField] private Collider2D m_CrouchDisableCollider;                // A collider that will be disabled when crouching
+	[SerializeField] private Collider2D m_BodyCollider;							// Body capsule collider of player 
+	[SerializeField] private PhysicsMaterial2D m_OnCardMaterial;				// Material to change to while on card 
+	[SerializeField] private PhysicsMaterial2D m_OnGroundMaterial;				// Material to change to while on ground 
 	[SerializeField] private ParticleSystem m_Dust; 
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -58,7 +61,11 @@ public class Controller2D : MonoBehaviour
 	private bool m_TouchingWall;
 	private bool isWallSliding;
 
+	void changeMaterial(PhysicsMaterial2D mat)
+    {
+		m_BodyCollider.sharedMaterial = mat;
 
+	}
 
 	private void Awake()
 	{
@@ -111,6 +118,12 @@ public class Controller2D : MonoBehaviour
 			if (colliders[i].gameObject != gameObject)
 			{
 				m_Grounded = true;
+
+				// -- dynamically change material based on what player is standing on 
+				if(colliders[i].gameObject.tag == "ThrownPlayerCard")
+					changeMaterial(m_OnCardMaterial); 
+				else
+					changeMaterial(m_OnGroundMaterial);
 			}
 		}
 

@@ -19,7 +19,6 @@ public class EntranceController : MonoBehaviour
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
 
         // -- don't let them move 
-        player.GetComponent<PlayerMovement>().enabled = false;
         Controller2D controller = player.GetComponent<Controller2D>();
         controller.enabled = false;
 
@@ -40,7 +39,7 @@ public class EntranceController : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<Controller2D>().enabled = true; 
     }
+
 }

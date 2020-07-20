@@ -19,7 +19,6 @@ public class ExitController : MonoBehaviour
             Rigidbody2D rb = hitInfo.GetComponent<Rigidbody2D>();
 
             // -- don't let them move 
-            hitInfo.GetComponent<PlayerMovement>().enabled = false;
             Controller2D controller = hitInfo.GetComponent<Controller2D>();
             controller.enabled = false; 
 
