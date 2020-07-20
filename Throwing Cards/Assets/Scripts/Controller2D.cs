@@ -51,15 +51,18 @@ public class Controller2D : MonoBehaviour
 	private float fJumpPressedRemember = 0f;
 
 	/* Wall Sliding and Jumping */
-
-
 	[SerializeField] private LayerMask m_WhatIsWall;
 	public Transform WallCheck;
 	public float wallSlidingSpeed;
+	public float xWallForce;
+	public float yWallForce;
 	const float k_WallRadius = .2f;
 
 	private bool m_TouchingWall;
 	private bool isWallSliding;
+
+	private bool wallJumping;
+	public float wallJumpTime; 
 
 	void changeMaterial(PhysicsMaterial2D mat)
     {
@@ -107,6 +110,68 @@ public class Controller2D : MonoBehaviour
 		groundedTimer -= Time.fixedDeltaTime;  // cayote timer 
 		fJumpPressedRemember -= Time.fixedDeltaTime; // buffered jump timer 
 
+		setGlobalGrounded();
+
+		// -- uses variables fJumpPressedRemember, groundedTimer, and jumpTimer that was obtained in UPDATE 
+		JumpingLogic();
+
+		// -- uses variables m_Grounded that was obtained in FIXED-UPDATE and horizontalMove which was obtained in UPDATE 
+		WallSlidingLogic();
+
+		// -- uses variable horizontalMove which was obtained in UPDATE 
+		MoveAndCrouch();
+
+		// -- uses variable horizontalMove which was obtained in UPDATE 
+		FlipLogic();
+
+	}
+
+	public void WallSlidingLogic()
+	{
+		m_TouchingWall = Physics2D.OverlapCircle(WallCheck.position, k_WallRadius, m_WhatIsWall);
+		// -- if touching wall and moving into wall with arrow key and not grounded
+		if (m_TouchingWall && !m_Grounded && Mathf.Abs(horizontalMove) > 0)
+		{
+			isWallSliding = true;
+		}
+		else
+		{
+			isWallSliding = false;
+		}
+
+		if(isWallSliding)
+        {
+			print("Touching wall...");
+
+			// -- essentialy change y velocity to b/w wall-sliding speed value(which is NEGATIVE) and max value 
+			m_Rigidbody2D.velocity = 
+				new Vector2(m_Rigidbody2D.velocity.x, Mathf.Clamp(m_Rigidbody2D.velocity.y, -wallSlidingSpeed, float.MaxValue)); 
+        }
+
+		// -- if they pressed jump and they are wall sliding 
+		if(fJumpPressedRemember > 0 && isWallSliding)
+        {
+			wallJumping = true;
+			// -- after certain amount of time stop wall jumping 
+			Invoke("SetWallJumpingToFalse", wallJumpTime);
+
+			fJumpPressedRemember = 0f; 
+		}
+
+		if(wallJumping)
+        {
+			m_Rigidbody2D.velocity = new Vector2(xWallForce * -horizontalMove, yWallForce); 
+        }
+
+	}
+
+	void SetWallJumpingToFalse()
+    {
+		wallJumping = false; 
+    }
+
+	public void setGlobalGrounded()
+    {
 		// -- check for grounded 
 		m_Grounded = false;
 
@@ -120,16 +185,20 @@ public class Controller2D : MonoBehaviour
 				m_Grounded = true;
 
 				// -- dynamically change material based on what player is standing on 
-				if(colliders[i].gameObject.tag == "ThrownPlayerCard")
-					changeMaterial(m_OnCardMaterial); 
+				if (colliders[i].gameObject.tag == "ThrownPlayerCard")
+					changeMaterial(m_OnCardMaterial);
 				else
 					changeMaterial(m_OnGroundMaterial);
 			}
 		}
+	}
 
+
+	public void JumpingLogic()
+    {
 		// -- this is key for not needing an onlanding event! 
-		if(m_Grounded)
-        {
+		if (m_Grounded)
+		{
 			animator.SetBool("isJumping", false);
 
 			// -- whenever you find ground reset timer for cayote jumping 
@@ -137,21 +206,23 @@ public class Controller2D : MonoBehaviour
 		}
 		// -- this is for like falling without pressing jump key 
 		else
-        {
+		{
 			animator.SetBool("isJumping", true);
 		}
+
+		// uses variables that were obtained in update to jump 
 
 		// -- jump if you pressed jump recently(jump buffering) or were grounded recently (cayote jumping) 
 		// -- jumpTimer variable is to prevent spam jumping 
 		if (fJumpPressedRemember > 0 && groundedTimer >= 0 && jumpTimer <= 0)
 		{
 			// -- if falling then it's a buffered jump and then wait till velocity is zero 
-			if(m_Rigidbody2D.velocity.y < 0)
-            {
+			if (m_Rigidbody2D.velocity.y < 0)
+			{
 				// -- don't jump or reset just wait till they hit ground and velocity is zero  
-            }
+			}
 			else
-            {
+			{
 				animator.SetBool("isJumping", true);
 
 				Jump();
@@ -165,33 +236,13 @@ public class Controller2D : MonoBehaviour
 				// -- reset jump timer to prevent spamming 
 				jumpTimer = jumpTimerTime;
 			}
-
-
 		}
-
-
-		m_TouchingWall = Physics2D.OverlapCircle(WallCheck.position, k_WallRadius, m_WhatIsWall);
-		// -- if touching wall and moving into wall with arrow key and not grounded
-		if(m_TouchingWall && !m_Grounded && horizontalMove > 0)
-        {
-			isWallSliding = true; 
-        }
-		else
-        {
-			isWallSliding = false; 
-        }
-
-		// -- actually affect rigidbody and do animations for moving, flipping, crouching 
-		float move = horizontalMove * Time.fixedDeltaTime; 
-		
-		MoveAndCrouch(move, crouch);
-		Flip(move);
-
-
 	}
-
-	public void MoveAndCrouch(float move, bool crouch)
+	// -- move and crouch are in same function because crouch affects move speed
+	public void MoveAndCrouch()
 	{
+		float move = horizontalMove * Time.fixedDeltaTime;
+
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
 		{
@@ -264,8 +315,10 @@ public class Controller2D : MonoBehaviour
 		}
 	}
 
-	public void Flip(float move)
+	public void FlipLogic()
     {
+		float move = horizontalMove * Time.fixedDeltaTime;
+
 		// -- flipping player 
 		// If the input is moving the player right and the player is facing left...
 		if (move > 0 && !m_FacingRight)
@@ -314,6 +367,7 @@ public class Controller2D : MonoBehaviour
 		m_Dust.Play(); 
     }
 
+	// -- actual physical flipping 
     public void Flip()
 	{
 		// Switch the way the player is labelled as facing.
