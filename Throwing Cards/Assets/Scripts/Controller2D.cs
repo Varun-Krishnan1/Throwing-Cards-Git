@@ -15,7 +15,7 @@ public class Controller2D : MonoBehaviour
 	[Range(0, 1)] [SerializeField] private float fHorizontalDampingWhenTurning = .22f;
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
-	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
+	[SerializeField] private Transform m_GroundCheck;					   // A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
 	[SerializeField] private Collider2D m_CrouchDisableCollider;                // A collider that will be disabled when crouching
 	[SerializeField] private ParticleSystem m_Dust; 
@@ -29,7 +29,10 @@ public class Controller2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private Vector3 m_Velocity = Vector3.zero;
 
-
+	/* Internal Input Varibles  */
+	float horizontalMove = 0f;
+	bool crouch = false;
+	bool jumpHeight = false;
 
 	/* Better Jumping */
 	public Animator animator;
@@ -44,12 +47,16 @@ public class Controller2D : MonoBehaviour
 	private float fJumpPressedRememberTime = 0.2f;      // amount of time script remembers user pressed jump (allows for jump buffering) 
 	private float fJumpPressedRemember = 0f;
 
+	/* Wall Sliding and Jumping */
 
-	/* Internal Input Varibles  */
-	float horizontalMove = 0f;
-	bool jump = false;
-	bool crouch = false;
-	bool jumpHeight = false;
+
+	[SerializeField] private LayerMask m_WhatIsWall;
+	public Transform WallCheck;
+	public float wallSlidingSpeed;
+	const float k_WallRadius = .2f;
+
+	private bool m_TouchingWall;
+	private bool isWallSliding;
 
 
 
@@ -77,7 +84,7 @@ public class Controller2D : MonoBehaviour
 		/*if (Input.GetButtonUp("Jump"))
 		{
 			jumpHeight = true;
-		}*/ 
+		}*/
 
 		if (Input.GetButtonDown("Crouch"))
 		{
@@ -115,6 +122,7 @@ public class Controller2D : MonoBehaviour
 			// -- whenever you find ground reset timer for cayote jumping 
 			groundedTimer = groundedTimerTime;
 		}
+		// -- this is for like falling without pressing jump key 
 		else
         {
 			animator.SetBool("isJumping", true);
@@ -124,33 +132,52 @@ public class Controller2D : MonoBehaviour
 		// -- jumpTimer variable is to prevent spam jumping 
 		if (fJumpPressedRemember > 0 && groundedTimer >= 0 && jumpTimer <= 0)
 		{
-			print("Jump Here!");
-			animator.SetBool("isJumping", true);
+			// -- if falling then it's a buffered jump and then wait till velocity is zero 
+			if(m_Rigidbody2D.velocity.y < 0)
+            {
+				// -- don't jump or reset just wait till they hit ground and velocity is zero  
+            }
+			else
+            {
+				animator.SetBool("isJumping", true);
 
-			jump = true;
+				Jump();
 
-			// -- reset jump buffering 
-			fJumpPressedRemember = 0;
+				// -- reset jump buffering 
+				fJumpPressedRemember = 0;
 
-			// -- reset cayote timer 
-			groundedTimer = 0;
+				// -- reset cayote timer 
+				groundedTimer = 0;
 
-			// -- reset jump timer to prevent spamming 
-			jumpTimer = jumpTimerTime;
+				// -- reset jump timer to prevent spamming 
+				jumpTimer = jumpTimerTime;
+			}
+
 
 		}
-		
-		// -- actual moving AND animations occurs in this function (besides jump animations) 
-		this.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump, jumpHeight);
 
-		// -- reset variables 
-		jump = false;
-		jumpHeight = false;
+
+		m_TouchingWall = Physics2D.OverlapCircle(WallCheck.position, k_WallRadius, m_WhatIsWall);
+		// -- if touching wall and moving into wall with arrow key and not grounded
+		if(m_TouchingWall && !m_Grounded && horizontalMove > 0)
+        {
+			isWallSliding = true; 
+        }
+		else
+        {
+			isWallSliding = false; 
+        }
+
+		// -- actually affect rigidbody and do animations for moving, flipping, crouching 
+		float move = horizontalMove * Time.fixedDeltaTime; 
+		
+		MoveAndCrouch(move, crouch);
+		Flip(move);
+
 
 	}
 
-
-	public void Move(float move, bool crouch, bool jump, bool jumpHeight)
+	public void MoveAndCrouch(float move, bool crouch)
 	{
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
@@ -163,7 +190,7 @@ public class Controller2D : MonoBehaviour
 		}
 
 		//only control the player if grounded or airControl is turned on
-		if (m_Grounded|| m_AirControl)
+		if (m_Grounded || m_AirControl)
 		{
 
 			// If crouching
@@ -221,35 +248,39 @@ public class Controller2D : MonoBehaviour
 				fHorizontalVelocity *= (float)Math.Pow(1f - fHorizontalDampingBasic, Time.deltaTime * 10f);
 
 			m_Rigidbody2D.velocity = new Vector2(fHorizontalVelocity, m_Rigidbody2D.velocity.y);
-
-			// -- flipping player 
-			// If the input is moving the player right and the player is facing left...
-			if (move > 0 && !m_FacingRight)
-			{
-				Flip();
-			}
-			// Otherwise if the input is moving the player left and the player is facing right...
-			else if (move < 0 && m_FacingRight)
-			{
-				Flip();
-			}
 		}
+	}
 
-		// If player should jump 
-		if (jump)
+	public void Flip(float move)
+    {
+		// -- flipping player 
+		// If the input is moving the player right and the player is facing left...
+		if (move > 0 && !m_FacingRight)
 		{
-			print("JUMP THERE");
-			// Add a vertical force to the player.
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-
-			// -- particle effect 
-			CreateDust();
-			
-			// -- cancel shooting animation and cane loading animation 
-			animator.SetBool("isShooting", false);
-			animator.SetBool("isLoadingCane", false);
-
+			Flip();
 		}
+		// Otherwise if the input is moving the player left and the player is facing right...
+		else if (move < 0 && m_FacingRight)
+		{
+			Flip();
+		}
+	}
+
+	public void Jump()
+    {
+
+		print("Adding jump force...");
+		// Add a vertical force to the player
+
+		// -- for jump buffering first got to ensure velocity is zero 
+		m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+
+		// -- particle effect 
+		CreateDust();
+
+		// -- cancel shooting animation and cane loading animation 
+		animator.SetBool("isShooting", false);
+		animator.SetBool("isLoadingCane", false);
 
 		// -- no jump height functionality for now 
 		// changing jump height based on how long they pressed jump for
@@ -262,7 +293,7 @@ public class Controller2D : MonoBehaviour
 					m_Rigidbody2D.velocity.y * fCutJumpHeight);
 			}
 		}*/
-    }
+	}
 
 
 	public void CreateDust()

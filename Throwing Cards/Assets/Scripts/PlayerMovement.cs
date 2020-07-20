@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         fJumpPressedRemember -= Time.fixedDeltaTime;
-        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump, jumpHeight);
+        // controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump, jumpHeight);
 
         // -- Move Animations 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
