@@ -70,7 +70,6 @@ public class Dialogue : MonoBehaviour
 
         if (curSentences.Count > 0 && textTimer <= 0)
         {
-            print("Dialogue Update Called...");
             // -- set global variable to next sentence 
             curSentence = curSentences.Dequeue();
 
@@ -92,7 +91,6 @@ public class Dialogue : MonoBehaviour
 
     public void AddSentence(string sentence)
     {
-        print("Adding sentence...");
         curSentences.Enqueue(sentence); 
     }
 

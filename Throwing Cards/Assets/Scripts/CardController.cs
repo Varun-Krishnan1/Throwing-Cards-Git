@@ -126,7 +126,7 @@ public class CardController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collisionObject)
     {
         GameObject hitInfo = collisionObject.gameObject;
-
+        print(hitInfo.tag); 
         // -- get contact point 
         Vector3 contact = collisionObject.GetContact(0).point;
 
@@ -135,25 +135,13 @@ public class CardController : MonoBehaviour
 
         // -- if hit enemy 
         if (enemy != null && !hitObject)
-        { 
-            // -- set particle impact sprite here so delay doesn't happen 
-            // -- in start() 
-            setParticleImpactSprite(); 
-
-            // -- split second pause for added effect 
-            // -- camera shake and destroy object called in this function 
-            StartCoroutine(pauseTime(enemyPauseTime));
-
+        {
+            ScreenShakeAndParticleImpactEffect(contact); 
 
             // -- call enemy takedamage() function 
             enemy.TakeDamage(this.value);
 
-            // -- particle impact effect at contact point 
-            ParticleSystem.MainModule psmain = particleEffect.GetComponent<ParticleSystem>().main;
-            psmain.startSize = particleEffectStartSize;
-            Instantiate(particleEffect, contact, transform.rotation);
 
-            
             // -- get the popup position of the collider it hits and put a popup of the damage there! 
             this.damagePopupEffect(hitInfo.gameObject.transform.Find("PopupPosition").position);        // -- this is a function in this class 
 
@@ -162,9 +150,15 @@ public class CardController : MonoBehaviour
 
         }
 
-        // -- make object stick into object if it hits object other than enemy 
+        // -- make object stick into object if it hits anything other than above if checks 
         else if (!hitObject)
         {
+
+            // -- if hits interactable object add screen shake and particle impact effect 
+            if (collisionObject.gameObject.tag == "InteractableObject")
+            {
+                ScreenShakeAndParticleImpactEffect(contact); 
+            }
 
             // -- stop particle trail 
             particleTrail.GetComponent<ParticleSystem>().Stop();
@@ -204,6 +198,22 @@ public class CardController : MonoBehaviour
             hitObject = true;
             cardFrozen = true;
         }
+    }
+
+    private void ScreenShakeAndParticleImpactEffect(Vector3 contactPoint)
+    {
+        // -- set particle impact sprite here so delay doesn't happen 
+        // -- in start() 
+        setParticleImpactSprite();
+
+        // -- split second pause for added effect 
+        // -- camera shake and destroy object called in this function 
+        StartCoroutine(pauseTime(enemyPauseTime));
+
+        // -- particle impact effect at contact point 
+        ParticleSystem.MainModule psmain = particleEffect.GetComponent<ParticleSystem>().main;
+        psmain.startSize = particleEffectStartSize;
+        Instantiate(particleEffect, contactPoint, transform.rotation);
     }
 
 

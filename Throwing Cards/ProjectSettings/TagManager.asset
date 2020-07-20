@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - ThrownCane
   - Exit
+  - InteractableObject
   layers:
   - Default
   - TransparentFX
