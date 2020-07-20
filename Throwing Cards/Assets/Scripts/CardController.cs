@@ -126,7 +126,6 @@ public class CardController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collisionObject)
     {
         GameObject hitInfo = collisionObject.gameObject;
-        print(hitInfo.tag); 
         // -- get contact point 
         Vector3 contact = collisionObject.GetContact(0).point;
 
@@ -136,7 +135,7 @@ public class CardController : MonoBehaviour
         // -- if hit enemy 
         if (enemy != null && !hitObject)
         {
-            ScreenShakeAndParticleImpactEffect(contact); 
+            ScreenShakeAndParticleImpactEffect(contact, true); 
 
             // -- call enemy takedamage() function 
             enemy.TakeDamage(this.value);
@@ -157,7 +156,7 @@ public class CardController : MonoBehaviour
             // -- if hits interactable object add screen shake and particle impact effect 
             if (collisionObject.gameObject.tag == "InteractableObject")
             {
-                ScreenShakeAndParticleImpactEffect(contact); 
+                ScreenShakeAndParticleImpactEffect(contact, true); 
             }
 
             // -- stop particle trail 
@@ -200,7 +199,7 @@ public class CardController : MonoBehaviour
         }
     }
 
-    private void ScreenShakeAndParticleImpactEffect(Vector3 contactPoint)
+    private void ScreenShakeAndParticleImpactEffect(Vector3 contactPoint, bool destroyObject)
     {
         // -- set particle impact sprite here so delay doesn't happen 
         // -- in start() 
@@ -208,7 +207,7 @@ public class CardController : MonoBehaviour
 
         // -- split second pause for added effect 
         // -- camera shake and destroy object called in this function 
-        StartCoroutine(pauseTime(enemyPauseTime));
+        StartCoroutine(pauseTime(enemyPauseTime, destroyObject));
 
         // -- particle impact effect at contact point 
         ParticleSystem.MainModule psmain = particleEffect.GetComponent<ParticleSystem>().main;
@@ -259,7 +258,7 @@ public class CardController : MonoBehaviour
         return !hitObject;
     }
 
-    IEnumerator pauseTime(float duration)
+    IEnumerator pauseTime(float duration, bool destroyObject)
     {
         Time.timeScale = 0f; 
         yield return new WaitForSecondsRealtime(duration);
@@ -268,8 +267,12 @@ public class CardController : MonoBehaviour
         // -- camera shake 
         CameraShake.Instance.ShakeCamera(cameraShakeStartIntensity, cameraShakeDuration);
 
-        // -- NOW destroy object 
-        Destroy(gameObject); 
+        if(destroyObject)
+        {
+            // -- NOW destroy object 
+            Destroy(gameObject);
+        }
+
     }
     // ---- Old Functions ---- 
     /* 
