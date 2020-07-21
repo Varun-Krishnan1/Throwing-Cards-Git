@@ -72,4 +72,16 @@ public class CaneWeapon : Weapon
 
     }
 
+    public override float getFireRateTime()
+    {
+        // -- cane doesn't have a fire rate time 
+
+        return 0f; 
+    }
+
+    public override void setFireRateTime(float value)
+    {
+        // -- cane doesn't have a fire rate time 
+    }
+
 }

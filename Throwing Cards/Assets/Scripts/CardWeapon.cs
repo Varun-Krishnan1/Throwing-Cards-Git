@@ -98,6 +98,15 @@ public class CardWeapon : Weapon
         setRandomCard(); 
     }
 
+    public override float getFireRateTime()
+    {
+        return this.fireRateTime; 
+    }
+
+    public override void setFireRateTime(float value)
+    {
+        this.fireRateTime = value; 
+    }
 
     public void setRandomCard()
     {
@@ -133,6 +142,7 @@ public class CardWeapon : Weapon
         // -- then set lighting 
 
     }
+
 }
 
 // -- let's use struct for card object because it's stored on stack not heap so access to it is very fast 

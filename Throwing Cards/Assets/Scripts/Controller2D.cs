@@ -142,15 +142,25 @@ public class Controller2D : MonoBehaviour
 		if(isWallSliding)
         {
 			print("Touching wall...");
+			animator.SetBool("isWallSliding", true);
+			animator.SetBool("isJumping", false);
+
+			// -- particle effect 
+			CreateDust();
 
 			// -- essentialy change y velocity to b/w wall-sliding speed value(which is NEGATIVE) and max value 
 			m_Rigidbody2D.velocity = 
 				new Vector2(m_Rigidbody2D.velocity.x, Mathf.Clamp(m_Rigidbody2D.velocity.y, -wallSlidingSpeed, float.MaxValue)); 
         }
+		else
+        {
+			animator.SetBool("isWallSliding", false);
+		}
 
 		// -- if they pressed jump and they are wall sliding 
 		if(fJumpPressedRemember > 0 && isWallSliding)
         {
+
 			wallJumping = true;
 			// -- after certain amount of time stop wall jumping 
 			Invoke("SetWallJumpingToFalse", wallJumpTime);
@@ -160,6 +170,12 @@ public class Controller2D : MonoBehaviour
 
 		if(wallJumping)
         {
+			animator.SetBool("isWallSliding", false);
+			animator.SetBool("isJumping", true);
+
+			// -- particle effect 
+			CreateDust();
+
 			m_Rigidbody2D.velocity = new Vector2(xWallForce * -horizontalMove, yWallForce); 
         }
 
@@ -184,11 +200,16 @@ public class Controller2D : MonoBehaviour
 			{
 				m_Grounded = true;
 
-				// -- dynamically change material based on what player is standing on 
-				if (colliders[i].gameObject.tag == "ThrownPlayerCard")
-					changeMaterial(m_OnCardMaterial);
-				else
-					changeMaterial(m_OnGroundMaterial);
+				// -- dynamically change material based on what player is standing on if they're on a card 
+				CardController card = colliders[i].gameObject.GetComponent<CardController>();
+				if (card != null) {
+					card.changeMaterial(m_OnCardMaterial);
+					this.changeMaterial(m_OnCardMaterial);
+				}
+				else {
+					card.changeMaterial(m_OnGroundMaterial);
+					this.changeMaterial(m_OnGroundMaterial);
+				}
 			}
 		}
 	}
@@ -200,6 +221,7 @@ public class Controller2D : MonoBehaviour
 		if (m_Grounded)
 		{
 			animator.SetBool("isJumping", false);
+
 
 			// -- whenever you find ground reset timer for cayote jumping 
 			groundedTimer = groundedTimerTime;
@@ -224,6 +246,8 @@ public class Controller2D : MonoBehaviour
 			else
 			{
 				animator.SetBool("isJumping", true);
+				animator.SetBool("isWallSliding", false);
+
 
 				Jump();
 
@@ -244,7 +268,7 @@ public class Controller2D : MonoBehaviour
 		float move = horizontalMove * Time.fixedDeltaTime;
 
 		// If crouching, check to see if the character can stand up
-		if (!crouch)
+		if (!crouch && !isWallSliding && m_Rigidbody2D.velocity.y == 0)
 		{
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))

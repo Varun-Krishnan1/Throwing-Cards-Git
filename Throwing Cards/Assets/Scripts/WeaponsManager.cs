@@ -91,7 +91,7 @@ public class WeaponsManager : MonoBehaviour
         }
 
         // -- get input 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !animator.GetBool("isWallSliding"))
         {
             Weapon weapon = weapons[selectedWeaponIndex];
 
@@ -135,7 +135,6 @@ public class WeaponsManager : MonoBehaviour
         {
             string printString = "";
             float curSpeed = animator.GetFloat("cardThrowingSpeed");
-            float shootTimeFrac = .62f;
 
             if (curSpeed == 8)
             {
@@ -144,23 +143,15 @@ public class WeaponsManager : MonoBehaviour
             }
             else
             {
-                if (curSpeed * 2 == 8)
+                foreach(Weapon weapon in weapons)
                 {
-                    shootTimeFrac = .45f;
-                }
-                if (curSpeed * 2 == 4)
-                {
-                    shootTimeFrac = .52f;
-                }
-                if (curSpeed * 2 == 2)
-                {
-                    shootTimeFrac = .6f;
+                    weapon.setFireRateTime(weapon.getFireRateTime() / 2);
 
                 }
 
                 animator.SetFloat("cardThrowingSpeed", curSpeed * 2f);
-                float shootTime = animator.runtimeAnimatorController.animationClips.First(x => x.name == "CardThrowing").length;
-                //fireRateTime = shootTime * shootTimeFrac; // multiply by where shoot animation is in length 
+                //float shootTime = animator.runtimeAnimatorController.animationClips.First(x => x.name == "CardThrowing").length;
+                //fireRateTime = shootTimeFrac * curSpeed;  
                 printString = (curSpeed * 2f).ToString() + "x";
 
             }
@@ -184,18 +175,14 @@ public class WeaponsManager : MonoBehaviour
             else
             {
 
-                if (curSpeed / 2 == 4)
+                foreach (Weapon weapon in weapons)
                 {
-                    shootTimeFrac = .55f;
-                }
-                if (curSpeed / 2 == 2)
-                {
-                    shootTimeFrac = .6f;
+                    weapon.setFireRateTime(weapon.getFireRateTime() * 2); 
 
                 }
 
                 animator.SetFloat("cardThrowingSpeed", curSpeed / 2f);
-                float shootTime = animator.runtimeAnimatorController.animationClips.First(x => x.name == "CardThrowing").length;
+                //float shootTime = animator.runtimeAnimatorController.animationClips.First(x => x.name == "CardThrowing").length;
                 //fireRateTime = shootTime * shootTimeFrac;
                 printString = (curSpeed * .5f).ToString() + "x";
 

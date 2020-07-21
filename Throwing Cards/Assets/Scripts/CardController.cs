@@ -16,6 +16,7 @@ public class CardController : MonoBehaviour
     public float enemyPauseTime;
 
     public Rigidbody2D rb;
+    private BoxCollider2D col; 
     public GameObject damagePopup;
 
     [Header("Camera Shake")]
@@ -55,7 +56,7 @@ public class CardController : MonoBehaviour
     {
         rb.velocity = transform.right * speed;
         // -- get original collider size 
-        BoxCollider2D col = this.GetComponent<BoxCollider2D>();
+        col = this.GetComponent<BoxCollider2D>();
         colSize = col.size;
 
         // -- scale down size 
@@ -274,6 +275,12 @@ public class CardController : MonoBehaviour
         }
 
     }
+
+    public void changeMaterial(PhysicsMaterial2D mat)
+    {
+        col.sharedMaterial = mat;
+    }
+
     // ---- Old Functions ---- 
     /* 
     public void FreezeIfNotMoving()
