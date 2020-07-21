@@ -62,7 +62,9 @@ public class Controller2D : MonoBehaviour
 	private bool isWallSliding;
 
 	private bool wallJumping;
-	public float wallJumpTime; 
+	public float wallJumpTime;
+
+	private CardController prevCard; 
 
 	void changeMaterial(PhysicsMaterial2D mat)
     {
@@ -200,20 +202,46 @@ public class Controller2D : MonoBehaviour
 			{
 				m_Grounded = true;
 
-				// -- dynamically change material based on what player is standing on if they're on a card 
-				CardController card = colliders[i].gameObject.GetComponent<CardController>();
-				if (card != null) {
-					card.changeMaterial(m_OnCardMaterial);
-					this.changeMaterial(m_OnCardMaterial);
-				}
-				else {
-					card.changeMaterial(m_OnGroundMaterial);
-					this.changeMaterial(m_OnGroundMaterial);
-				}
+				DynamicallyChangeMaterial(colliders[i].gameObject); 
+				
 			}
 		}
 	}
 
+	private void DynamicallyChangeMaterial(GameObject objectIsOn)
+    {
+		// -- NOTE:  the commented sections have the potential to have the functionality every time he moves off a card it gets destroyed 
+
+		// -- dynamically change material based on what player is standing on if they're on a card 
+		CardController card = objectIsOn.GetComponent<CardController>();
+		if (card != null)
+		{
+			//card.changeMaterial(m_OnCardMaterial);
+			this.changeMaterial(m_OnCardMaterial);
+			
+			/* 
+			if(prevCard != null && prevCard != card)
+            {
+				Destroy(prevCard.gameObject);
+			}
+			// -- if they jump off keep track of last card they were on 
+			prevCard = card;
+			*/ 
+		}
+		else
+		{
+			/* 
+			if (prevCard != null)
+			{
+				print("Jumped off card"); 
+				//prevCard.changeMaterial(m_OnGroundMaterial);
+				//prevCard.toggleFreezeState(); 
+				Destroy(prevCard.gameObject);
+			}
+			*/ 
+			this.changeMaterial(m_OnGroundMaterial);
+		}
+	}
 
 	public void JumpingLogic()
     {

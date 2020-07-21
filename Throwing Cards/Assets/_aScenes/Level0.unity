@@ -311,6 +311,34 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1256261105, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1256261105, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.074
+      objectReference: {fileID: 0}
+    - target: {fileID: 1324495787, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.015756
+      objectReference: {fileID: 0}
+    - target: {fileID: 1324495787, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
+      propertyPath: m_Size.y
+      value: 1.1332343
+      objectReference: {fileID: 0}
+    - target: {fileID: 1324495788, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.6991284
+      objectReference: {fileID: 0}
+    - target: {fileID: 1324495788, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
+      propertyPath: m_Size.y
+      value: 0.6993041
+      objectReference: {fileID: 0}
+    - target: {fileID: 1324495789, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
+      propertyPath: fireRateTime
+      value: 1.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1324495791, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
       propertyPath: m_FacingRight
       value: 1
