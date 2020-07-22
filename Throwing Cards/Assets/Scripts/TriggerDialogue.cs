@@ -9,30 +9,22 @@ public class TriggerDialogue : MonoBehaviour
     public string playbackSentence;
     public bool triggerAtTime; 
     public float waitTimeBeforePlaying;
-    public GameObject[] onlyTriggerIfTheseTriggered; 
+    public GameObject[] onlyTriggerIfTheseTriggered;
+    public GameObject[] onlyTriggerIfTheseNotTriggered; 
 
     private bool notHitPlayer = true; // -- have to add flag because capsule collider can contact twice! 
     private float timePassed = 0f;
-    private bool allTriggersTriggered; 
+    private bool triggerChecksPassed; 
 
     void Awake()
     {
-        allTriggersTriggered = true; // -- assume everything triggered 
-
-        // -- but if any object still exists in trigger point array then set to false 
-        foreach (GameObject triggerPoint in onlyTriggerIfTheseTriggered)
-        {
-            if (triggerPoint != null)
-            {
-                allTriggersTriggered = false;
-            }
-        }
+        triggerChecksPassed = true; // -- assume everything triggered 
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
         // -- if it's not a trigger at time function 
-        if(hitInfo.gameObject.tag == "Player" && notHitPlayer && !triggerAtTime && allTriggersTriggered)
+        if(hitInfo.gameObject.tag == "Player" && notHitPlayer && !triggerAtTime && triggerChecksPassed)
         {
             notHitPlayer = false; 
             Dialogue.instance.AddSentence(playbackSentence);
@@ -44,7 +36,7 @@ public class TriggerDialogue : MonoBehaviour
 
     void Update()
     {
-        allTriggersTriggered = true; 
+        triggerChecksPassed = true; 
         // -- iteratre through trigger objects array 
         foreach (GameObject triggerPoint in onlyTriggerIfTheseTriggered)
         {
@@ -58,19 +50,48 @@ public class TriggerDialogue : MonoBehaviour
                     // -- if it still hasn't been triggered 
                     if(!objTrigger.isTriggered())
                     {
-                        allTriggersTriggered = false; // -- then don't let any functions run 
+                        triggerChecksPassed = false; // -- then don't let any functions run 
                     }
                 }
                 // -- if not trigger object then it's a trigger point and make sure it's destroyed 
                 else
                 {
-                    allTriggersTriggered = false; // -- then don't let any functions run 
+                    triggerChecksPassed = false; // -- then don't let any functions run 
                 }
             }
         }
 
-        // -- if it's a trigger by time dialogue and all trigger points destroyed 
-        if (triggerAtTime && allTriggersTriggered)
+
+        // -- if first array passes test 
+        if(triggerChecksPassed)
+        {
+            // -- itearate through second trigger objects array 
+            foreach (GameObject triggerPoint in onlyTriggerIfTheseNotTriggered)
+            {
+                // -- if trigger point still exists in that array 
+                if (triggerPoint != null)
+                {
+                    ObjectTrigger objTrigger = triggerPoint.GetComponent<ObjectTrigger>();
+                    // -- if trigger point is an object trigger 
+                    if (objTrigger != null)
+                    {
+                        // -- if it HAS been triggered
+                        if (objTrigger.isTriggered())
+                        {
+                            triggerChecksPassed = false; // -- then don't let any functions run 
+                        }
+                    }
+                }
+                // -- if object has been destroyed it's been triggered 
+                else
+                {
+                    triggerChecksPassed = false; // -- then don't let any functions run 
+                }
+            }
+        }
+
+        // -- if it's a trigger by time dialogue and all trigger points checked 
+        if (triggerAtTime && triggerChecksPassed)
         {
             // -- only then decrement time 
             waitTimeBeforePlaying -= Time.deltaTime; 
