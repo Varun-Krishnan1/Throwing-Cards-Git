@@ -27,8 +27,9 @@ public class Controller2D : MonoBehaviour
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	private bool m_wasCrouching = false; // Whether or not the player was crouching 
-	const float k_CeilingRadius = .4f; // Radius of the overlap circle to determine if the player can stand up
-	private bool unPressedCrouch = false; 
+	const float k_CeilingRadius = 1f; // Radius of the overlap circle to determine if the player can stand up
+	private bool unPressedCrouch = false;
+	private float dynamicRadiusLength = .4f; 
 
 	/* Rigidbody Stuff */
 	private Rigidbody2D m_Rigidbody2D;
@@ -151,8 +152,10 @@ public class Controller2D : MonoBehaviour
 
 		setGlobalGrounded();
 
+		dynamicallyChangeMaterial(dynamicRadiusLength);
+
 		// -- uses variable state that was obtained in UPDATE 
-		switch(state)
+		switch (state)
         {
 			case State.Normal:
 				// -- uses variables fJumpPressedRemember, groundedTimer, and jumpTimer that was obtained in UPDATE 
@@ -290,46 +293,54 @@ public class Controller2D : MonoBehaviour
 			if (colliders[i].gameObject != gameObject)
 			{
 				m_Grounded = true;
-
-				DynamicallyChangeMaterial(colliders[i].gameObject); 
-				
 			}
 		}
 	}
 
-	private void DynamicallyChangeMaterial(GameObject objectIsOn)
+	private void dynamicallyChangeMaterial(float radiusCheckLength)
     {
 		// -- NOTE:  the commented sections have the potential to have the functionality every time he moves off a card it gets destroyed 
 
-		// -- dynamically change material based on what player is standing on if they're on a card 
-		CardController card = objectIsOn.GetComponent<CardController>();
-		if (card != null)
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, radiusCheckLength, m_WhatIsGround);
+		for (int i = 0; i < colliders.Length; i++)
 		{
-			//card.changeMaterial(m_OnCardMaterial);
-			this.changeMaterial(m_OnCardMaterial);
-			
-			/* 
-			if(prevCard != null && prevCard != card)
-            {
-				Destroy(prevCard.gameObject);
-			}
-			// -- if they jump off keep track of last card they were on 
-			prevCard = card;
-			*/ 
-		}
-		else
-		{
-			/* 
-			if (prevCard != null)
+			if (colliders[i].gameObject != gameObject)
 			{
-				print("Jumped off card"); 
-				//prevCard.changeMaterial(m_OnGroundMaterial);
-				//prevCard.toggleFreezeState(); 
-				Destroy(prevCard.gameObject);
+				CardController card = colliders[i].gameObject.GetComponent<CardController>();
+				if (card != null)
+				{
+					//card.changeMaterial(m_OnCardMaterial);
+					this.changeMaterial(m_OnCardMaterial);
+
+					/* 
+					if(prevCard != null && prevCard != card)
+					{
+						Destroy(prevCard.gameObject);
+					}
+					// -- if they jump off keep track of last card they were on 
+					prevCard = card;
+					*/
+
+					// -- the minute you find a card nearby change material and end function 
+					return; 
+				}
+				else
+				{
+					/* 
+					if (prevCard != null)
+					{
+						print("Jumped off card"); 
+						//prevCard.changeMaterial(m_OnGroundMaterial);
+						//prevCard.toggleFreezeState(); 
+						Destroy(prevCard.gameObject);
+					}
+					*/
+					this.changeMaterial(m_OnGroundMaterial);
+				}
+
 			}
-			*/ 
-			this.changeMaterial(m_OnGroundMaterial);
 		}
+		
 	}
 
 	public void JumpingLogic()

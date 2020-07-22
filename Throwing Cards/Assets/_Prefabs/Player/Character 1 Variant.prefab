@@ -6074,6 +6074,14 @@ MonoBehaviour:
   - {fileID: 46209267}
   multiplierPopup: {fileID: 6690956271067030631, guid: 65e490fc5c18aa14f926eb3d946bd572,
     type: 3}
+  fireRates:
+  - 12.8
+  - 6.4
+  - 3.2
+  - 1.05
+  - 0.6
+  - 0.4
+  - 0.2
   offset: 0
 --- !u!114 &46209267
 MonoBehaviour:
@@ -6155,7 +6163,6 @@ MonoBehaviour:
   cardInHand: {fileID: 8143226300342846641}
   currentCard: {fileID: 1329167508}
   player: {fileID: 3914993575741039915}
-  fireRateTime: 1.6
   weaponLighting: {fileID: 1034639927}
   offset: 0
   cardSprites:

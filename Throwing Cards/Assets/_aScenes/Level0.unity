@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -251,38 +251,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 46209258, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
-      propertyPath: fireRates.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 46209258, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
-      propertyPath: fireRates.Array.data[5]
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 46209258, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
-      propertyPath: fireRates.Array.data[4]
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 46209258, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
-      propertyPath: fireRates.Array.data[3]
-      value: 1.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 46209258, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
-      propertyPath: fireRates.Array.data[2]
-      value: 3.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 46209258, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
-      propertyPath: fireRates.Array.data[1]
-      value: 6.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 46209258, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
-      propertyPath: fireRates.Array.data[0]
-      value: 12.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 46209258, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
-      propertyPath: fireRates.Array.data[6]
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 1783336558939517445, guid: 7607fbaba4d6d874fa6c9ddbe163e51d,
         type: 3}
       propertyPath: m_LocalPosition.x
