@@ -91,7 +91,7 @@ public class WeaponsManager : MonoBehaviour
         }
 
         // -- get input 
-        if (Input.GetButtonDown("Fire1") && !animator.GetBool("isWallSliding"))
+        if (Input.GetButtonDown("Fire1") && !animator.GetBool("isWallSliding") && !animator.GetBool("isRolling"))
         {
             Weapon weapon = weapons[selectedWeaponIndex];
 

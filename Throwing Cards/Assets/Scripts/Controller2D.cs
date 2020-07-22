@@ -13,6 +13,7 @@ public class Controller2D : MonoBehaviour
 	[Range(0, 1)] [SerializeField] private float fHorizontalDampingBasic = .22f;     // How much to smooth out the movement
 	[Range(0, 1)] [SerializeField] private float fHorizontalDampingWhenStopping = .22f;
 	[Range(0, 1)] [SerializeField] private float fHorizontalDampingWhenTurning = .22f;
+	[Range(0, 1)] [SerializeField] private float fHorizontalDampingWhenRolling = .22f; 
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;					   // A position marking where to check if the player is grounded.
@@ -26,9 +27,10 @@ public class Controller2D : MonoBehaviour
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	private bool m_wasCrouching = false; // Whether or not the player was crouching 
-	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
+	const float k_CeilingRadius = .4f; // Radius of the overlap circle to determine if the player can stand up
+	private bool unPressedCrouch = false; 
 
-	/* Rigidbody Stuff */ 
+	/* Rigidbody Stuff */
 	private Rigidbody2D m_Rigidbody2D;
 	private Vector3 m_Velocity = Vector3.zero;
 
@@ -64,7 +66,23 @@ public class Controller2D : MonoBehaviour
 	private bool wallJumping;
 	public float wallJumpTime;
 
-	private CardController prevCard; 
+	/* Rolling */
+	public float rollingSpeed;
+	public float totalRollTime;
+	private float rollTime;
+	private float rollCooldownTimer = 0f; 
+
+
+	/* Testing */
+	private CardController prevCard;
+
+	/* State Machine */ 
+	private State state; 
+	private enum State
+    {
+		Normal, 
+		Rolling,
+    }
 
 	void changeMaterial(PhysicsMaterial2D mat)
     {
@@ -83,6 +101,7 @@ public class Controller2D : MonoBehaviour
 	{
 		// -- decrementing an input jump timer goes here 
 		jumpTimer -= Time.deltaTime;
+		rollCooldownTimer -= Time.deltaTime; 
 
 		// -- get inputs 
 		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
@@ -98,12 +117,29 @@ public class Controller2D : MonoBehaviour
 			jumpHeight = true;
 		}*/
 
-		if (Input.GetButtonDown("Crouch"))
+		// -- if they press crouch and not jumpign (this can be done better with a state machine) 
+		if (Input.GetButtonDown("Crouch") && m_Rigidbody2D.velocity.y == 0)
 		{
-			crouch = true;
+			// -- if moving and not in air or already crouching then it's a roll 
+			if (Mathf.Abs(horizontalMove) > .01 && rollCooldownTimer <= 0 && !crouch)
+			{
+				// -- tell fixed update roll was pressed 
+				state = State.Rolling;
+				// -- start roll timer 
+				rollTime = totalRollTime;
+
+				// -- set roll cooldown timer for how long it takes to do a roll
+				rollCooldownTimer = rollTime; 
+			}
+			else
+            {
+				crouch = true;
+			}
 		}
 		else if (Input.GetButtonUp("Crouch"))
+        {
 			crouch = false;
+		}
 	}
 
 	private void FixedUpdate()
@@ -114,21 +150,73 @@ public class Controller2D : MonoBehaviour
 
 		setGlobalGrounded();
 
-		// -- uses variables fJumpPressedRemember, groundedTimer, and jumpTimer that was obtained in UPDATE 
-		JumpingLogic();
+		// -- uses variable state that was obtained in UPDATE 
+		switch(state)
+        {
+			case State.Normal:
+				// -- uses variables fJumpPressedRemember, groundedTimer, and jumpTimer that was obtained in UPDATE 
+				JumpingLogic();
 
-		// -- uses variables m_Grounded that was obtained in FIXED-UPDATE and horizontalMove which was obtained in UPDATE 
-		WallSlidingLogic();
+				// -- uses variables m_Grounded that was obtained in FIXED-UPDATE and horizontalMove which was obtained in UPDATE 
+				WallSlidingLogic();
 
-		// -- uses variable horizontalMove which was obtained in UPDATE 
-		MoveAndCrouch();
+				// -- uses variable horizontalMove which was obtained in UPDATE 
+				MoveAndCrouch();
 
-		// -- uses variable horizontalMove which was obtained in UPDATE 
-		FlipLogic();
+				// -- uses variable horizontalMove which was obtained in UPDATE 
+				FlipLogic();
+				break; 
+			case State.Rolling:
+				// -- uses variables m_Grounded in FIXED UPDATE and horizontalMove
+				RollingLogic();
+				break; 
+		}
+
+
 
 	}
 
-	public void WallSlidingLogic()
+	private void RollingLogic()
+    {
+		float fHorizontalVelocity = m_Rigidbody2D.velocity.x;
+		animator.SetBool("isRolling", true);
+
+		if (this.isFacingRight())
+        {
+			fHorizontalVelocity += rollingSpeed;
+		}
+		else
+        {
+			fHorizontalVelocity -= rollingSpeed;
+		}
+
+		fHorizontalVelocity *= (float)Math.Pow(1f - fHorizontalDampingWhenRolling, Time.fixedDeltaTime * 10f);
+
+		m_Rigidbody2D.velocity = new Vector2(fHorizontalVelocity, m_Rigidbody2D.velocity.y);
+
+		// Disable one of the colliders when rolling
+		if (m_CrouchDisableCollider != null)
+			m_CrouchDisableCollider.enabled = false;
+
+		// -- stop after certain time 
+		if (rollTime < 0)
+        {
+			state = State.Normal;
+			animator.SetBool("isRolling", false);
+
+			// -- if ceiling above when they're done rolling put them in crouch 
+			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
+			{
+				crouch = true;
+			}
+
+		}
+
+		rollTime -= Time.fixedDeltaTime;
+
+	}
+
+	private void WallSlidingLogic()
 	{
 		m_TouchingWall = Physics2D.OverlapCircle(WallCheck.position, k_WallRadius, m_WhatIsWall);
 		// -- if touching wall and moving into wall with arrow key and not grounded
@@ -295,14 +383,21 @@ public class Controller2D : MonoBehaviour
 	{
 		float move = horizontalMove * Time.fixedDeltaTime;
 
-		// If crouching, check to see if the character can stand up
-		if (!crouch && !isWallSliding && m_Rigidbody2D.velocity.y == 0)
+		// If they are now not crouching, keep player crouching if ceiling above them 
+		if (!isWallSliding && m_Rigidbody2D.velocity.y == 0)
 		{
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
 			{
 				crouch = true;
+				unPressedCrouch = true; 
 			}
+			// - if they have unpressed crouch and you didn't find a ceiling set crouch to false  
+			else if(unPressedCrouch)
+            {
+				crouch = false;
+				unPressedCrouch = false; 
+            }
 		}
 
 		//only control the player if grounded or airControl is turned on
