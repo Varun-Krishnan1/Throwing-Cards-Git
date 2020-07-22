@@ -13,9 +13,9 @@ public class CardWeapon : Weapon
     public GameObject cardInHand;
     public GameObject currentCard; 
     public GameObject player;
-    public float fireRateTime;          // max fire rate time 
-    public Light2D weaponLighting; 
+    public Light2D weaponLighting;
 
+    private float fireRateTime;          // max fire rate time (set by weapons manager) 
     private float fireRate = 0f;        // current fire rate counter 
     public float offset;
     public Sprite[] cardSprites;
@@ -72,6 +72,7 @@ public class CardWeapon : Weapon
     // -- called to start shoot animation 
     public override bool startShootAnimation()
     {
+        print(fireRate); 
         // -- only start shoot animation if fire rate cooldown time is over 
         if (fireRate <= 0)
         {

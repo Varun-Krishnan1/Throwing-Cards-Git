@@ -13,10 +13,12 @@ public class WeaponsManager : MonoBehaviour
     public Animator animator; 
     public Weapon[] weapons;
     public GameObject multiplierPopup;
+    public float[] fireRates; 
 
     public float offset; 
 
     private int selectedWeaponIndex; 
+    private int curFireRateIndex; 
 
     private bool cardsFrozen = true;
 
@@ -27,6 +29,13 @@ public class WeaponsManager : MonoBehaviour
         Weapon weapon = weapons[selectedWeaponIndex];
 
         weapon.setWeaponImgObject(true);    // -- tell that weapons script to show the given weapon items 
+
+        // -- start fire rate at middle value 
+        curFireRateIndex = 3; 
+        foreach(Weapon w in weapons)
+        {
+            w.setFireRateTime(fireRates[curFireRateIndex]); 
+        }
     }
 
     void Update()
@@ -119,71 +128,57 @@ public class WeaponsManager : MonoBehaviour
 
     }
 
-
-    // -- NEEDS REWORKING 
-    public void ChangeSpeed()
+    private void ChangeFireSpeed(float factor)
     {
-        // ------------ TESTING FIRE SPEED ----------------- [THIS NEEDS REWORKING] 
-        if (Input.GetKeyDown("q"))
-        {
-            string printString = "";
-            float curSpeed = animator.GetFloat("cardThrowingSpeed");
+        string printString = "";
+        float curSpeed = animator.GetFloat("cardThrowingSpeed");
 
-            if (curSpeed == 8)
+        if (curSpeed == 8 && factor > 1)
+        {
+            // -- max speed reached 
+            printString = "Max Speed Reached!";
+        }
+        else if(curSpeed == .125 && factor < 1)
+        {
+            printString = "Lowest Speed Reached!";
+        }
+        else
+        {
+            if(factor < 1)
             {
-                // -- max speed reached 
-                printString = "Max Speed Reached!";
+                curFireRateIndex -= 1;
             }
             else
             {
-                foreach(Weapon weapon in weapons)
-                {
-                    weapon.setFireRateTime(weapon.getFireRateTime() / 2);
-
-                }
-
-                animator.SetFloat("cardThrowingSpeed", curSpeed * 2f);
-                //float shootTime = animator.runtimeAnimatorController.animationClips.First(x => x.name == "CardThrowing").length;
-                //fireRateTime = shootTimeFrac * curSpeed;  
-                printString = (curSpeed * 2f).ToString() + "x";
-
+                curFireRateIndex += 1;
             }
-            MultiplierPopupController multiplierPopupCon = multiplierPopup.GetComponent<MultiplierPopupController>();
-            multiplierPopupCon.Create(player.transform.position + new Vector3(0, 1.6f, 0), printString); ;
 
+            foreach (Weapon weapon in weapons)
+            {
+                weapon.setFireRateTime(fireRates[curFireRateIndex]);
+            }
 
+            animator.SetFloat("cardThrowingSpeed", curSpeed * factor);
+            printString = (curSpeed * factor).ToString() + "x";
+
+        }
+
+        // -- create popup saying new fire rate 
+        MultiplierPopupController multiplierPopupCon = multiplierPopup.GetComponent<MultiplierPopupController>();
+        multiplierPopupCon.Create(player.transform.position + new Vector3(0, 1.6f, 0), printString); ;
+    }
+
+    public void ChangeSpeed()
+    {
+        if (Input.GetKeyDown("q"))
+        {
+            // -- double firing speed 
+            ChangeFireSpeed(2f); 
         }
         if (Input.GetKeyDown("e"))
         {
-            string printString = "";
-            float curSpeed = animator.GetFloat("cardThrowingSpeed");
-            float shootTimeFrac = .62f;
-
-
-            if (curSpeed == .125)
-            {
-                // -- slowest speed reached 
-                printString = "Slowest Value Reached!";
-            }
-            else
-            {
-
-                foreach (Weapon weapon in weapons)
-                {
-                    weapon.setFireRateTime(weapon.getFireRateTime() * 2); 
-
-                }
-
-                animator.SetFloat("cardThrowingSpeed", curSpeed / 2f);
-                //float shootTime = animator.runtimeAnimatorController.animationClips.First(x => x.name == "CardThrowing").length;
-                //fireRateTime = shootTime * shootTimeFrac;
-                printString = (curSpeed * .5f).ToString() + "x";
-
-            }
-
-            MultiplierPopupController multiplierPopupCon = multiplierPopup.GetComponent<MultiplierPopupController>();
-            multiplierPopupCon.Create(player.transform.position + new Vector3(0, 1.6f, 0), printString);
-
+            // -- halve firing speed 
+            ChangeFireSpeed(.5f); 
         }
     }
 
