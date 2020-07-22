@@ -139,6 +139,7 @@ public class Controller2D : MonoBehaviour
 		else if (Input.GetButtonUp("Crouch"))
         {
 			crouch = false;
+			unPressedCrouch = true;
 		}
 	}
 
@@ -384,7 +385,7 @@ public class Controller2D : MonoBehaviour
 		float move = horizontalMove * Time.fixedDeltaTime;
 
 		// If they are now not crouching, keep player crouching if ceiling above them 
-		if (!isWallSliding && m_Rigidbody2D.velocity.y == 0)
+		if (unPressedCrouch && !isWallSliding && m_Rigidbody2D.velocity.y == 0)
 		{
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
@@ -393,7 +394,7 @@ public class Controller2D : MonoBehaviour
 				unPressedCrouch = true; 
 			}
 			// - if they have unpressed crouch and you didn't find a ceiling set crouch to false  
-			else if(unPressedCrouch)
+			else 
             {
 				crouch = false;
 				unPressedCrouch = false; 
