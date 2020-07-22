@@ -261,11 +261,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 46209258, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
       propertyPath: fireRates.Array.data[4]
-      value: 0.8
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 46209258, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
       propertyPath: fireRates.Array.data[3]
-      value: 1.6
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 46209258, guid: 7607fbaba4d6d874fa6c9ddbe163e51d, type: 3}
       propertyPath: fireRates.Array.data[2]
