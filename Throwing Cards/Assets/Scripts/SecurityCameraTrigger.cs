@@ -6,12 +6,12 @@ public class SecurityCameraTrigger : ObjectTrigger
 {
     public Rigidbody2D cameraRB; 
     public SecurityCameraRotation cameraRot; 
+    public float fallKillSpeed; 
 
     public override void OnCollisionEnter2D(Collision2D collider)
     {
         if (collider.gameObject.tag == "ThrownPlayerCard" || collider.gameObject.tag == "ThrownCane")
         {
-            print("HERe");
             // -- stop rotation 
             Destroy(cameraRot);
 
@@ -22,5 +22,12 @@ public class SecurityCameraTrigger : ObjectTrigger
             // -- activate trigger 
             triggerActivated = true;
         }
+        // -- if it falls on player kill them lol 
+        else if (collider.gameObject.tag == "Player" && collider.relativeVelocity.y > fallKillSpeed)
+        {
+            collider.gameObject.GetComponent<PlayerHealthController>().TakeDamage(100); 
+        }
+        print(collider.relativeVelocity.y);
+
     }
 }

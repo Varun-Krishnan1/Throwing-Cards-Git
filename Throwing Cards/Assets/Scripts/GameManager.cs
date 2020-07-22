@@ -35,6 +35,15 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        // -- allow reloading of scene with r 
+        if (Input.GetKeyDown("r"))
+        {
+            GameManager.instance.ReloadScene();
+        }
+    }
+
     public enum Scene
     {
         Level0, Level1, Level2, Level3
@@ -62,5 +71,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
 
 }

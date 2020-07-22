@@ -37,13 +37,6 @@ public class WeaponsManager : MonoBehaviour
         // -- allow them to change speed pressing Q and E [TEMPORARY -> TO BECOME PICKED UP MULTIPLIER] 
         ChangeSpeed();
 
-        // -- allow reloading of scene with r 
-        if(Input.GetKeyDown("r"))
-        {
-            GameManager.instance.ReloadScene(); 
-        }
-
-
         // -- set active weapon 
         int previousSelectedWeapon = selectedWeaponIndex; 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
