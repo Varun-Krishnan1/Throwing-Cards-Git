@@ -9,6 +9,7 @@ TagManager:
   - ThrownCane
   - Exit
   - InteractableObject
+  - Floor
   layers:
   - Default
   - TransparentFX

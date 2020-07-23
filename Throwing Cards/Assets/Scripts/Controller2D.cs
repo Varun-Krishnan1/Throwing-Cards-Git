@@ -235,7 +235,6 @@ public class Controller2D : MonoBehaviour
 
 		if(isWallSliding)
         {
-			print("Touching wall...");
 			animator.SetBool("isWallSliding", true);
 			animator.SetBool("isJumping", false);
 
@@ -494,7 +493,6 @@ public class Controller2D : MonoBehaviour
 	public void Jump()
     {
 
-		print("Adding jump force...");
 		// Add a vertical force to the player
 
 		// -- for jump buffering first got to ensure velocity is zero 

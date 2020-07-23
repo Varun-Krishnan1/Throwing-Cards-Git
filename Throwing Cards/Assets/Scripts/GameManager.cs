@@ -30,8 +30,6 @@ public class GameManager : MonoBehaviour
 
         Scene curScene = (Scene) Enum.Parse(typeof(Scene), SceneManager.GetActiveScene().name);
         level = Array.IndexOf(sceneArr, curScene);
-        print(SceneManager.GetActiveScene().name);
-        print(level);
 
     }
 

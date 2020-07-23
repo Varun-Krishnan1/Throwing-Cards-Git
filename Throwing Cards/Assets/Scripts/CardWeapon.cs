@@ -72,7 +72,6 @@ public class CardWeapon : Weapon
     // -- called to start shoot animation 
     public override bool startShootAnimation()
     {
-        print(fireRate); 
         // -- only start shoot animation if fire rate cooldown time is over 
         if (fireRate <= 0)
         {
