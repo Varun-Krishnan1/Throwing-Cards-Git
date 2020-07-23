@@ -37,7 +37,7 @@ public class TriggerDialogue : MonoBehaviour
     void Update()
     {
         triggerChecksPassed = true; 
-        // -- iteratre through trigger objects array 
+        // -- iterate through trigger objects array 
         foreach (GameObject triggerPoint in onlyTriggerIfTheseTriggered)
         {
             // -- if trigger point still exists in that array 
@@ -50,6 +50,7 @@ public class TriggerDialogue : MonoBehaviour
                     // -- if it still hasn't been triggered 
                     if(!objTrigger.isTriggered())
                     {
+                        print("HERE");
                         triggerChecksPassed = false; // -- then don't let any functions run 
                     }
                 }

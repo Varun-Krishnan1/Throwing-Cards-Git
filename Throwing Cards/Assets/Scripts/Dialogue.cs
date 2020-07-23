@@ -10,7 +10,8 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textDisplay;
     public float typingSpeed;
     public float wpm;
-    public float timeOnScreenPerWord; 
+    public float timeOnScreenPerWord;
+    public float extraTimeOnScreen; 
     public Animator textAnimator; 
 
 
@@ -47,7 +48,7 @@ public class Dialogue : MonoBehaviour
         // -- don't let them do new word yet 
         //textTimer = 1000f; 
         // -- assume 250 wpm -> 60/250 seconds per word then add the time it should remain on screen for 
-        textTimer = (numWords * (60/wpm)) + (timeOnScreenPerWord * numWords); 
+        textTimer = (numWords * (60 / wpm)) + (timeOnScreenPerWord * numWords) + extraTimeOnScreen; 
 
         foreach (char letter in curSentence.ToCharArray())
         {
