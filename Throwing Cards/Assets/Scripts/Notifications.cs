@@ -44,7 +44,8 @@ public class Notifications : MonoBehaviour
 
         textTimer = (numWords * (60 / wpm)) + (timeOnScreenPerWord * numWords) + extraTimeOnScreen;
 
-        notificationDisplay.text = curNotification; 
+        notificationDisplay.text = curNotification;
+
     }
 
     void Update()
@@ -55,13 +56,17 @@ public class Notifications : MonoBehaviour
         // -- and the last sentence has finished being displayed 
 
 
+        if(textTimer <= 0)
+        {
+            textAnimator.SetBool("changeText", false);
+        }
 
         if (curNotifications.Count > 0 && textTimer <= 0)
         {
             // -- set global variable to next sentence 
             curNotification = curNotifications.Dequeue();
 
-            // -- clear text 
+            // -- clear text and reset animation 
             notificationDisplay.text = "";
 
             // -- play text transition animation 

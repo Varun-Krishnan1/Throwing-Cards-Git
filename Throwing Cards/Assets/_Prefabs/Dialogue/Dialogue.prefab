@@ -46,7 +46,7 @@ MonoBehaviour:
   notificationDisplay: {fileID: 5705028462724917973}
   textAnimator: {fileID: 6023677692666994953}
   wpm: 250
-  timeOnScreenPerWord: 0
+  timeOnScreenPerWord: 0.1
   extraTimeOnScreen: 1
 --- !u!1 &5872170825532726266
 GameObject:

@@ -11,7 +11,8 @@ public class WeaponsManager : MonoBehaviour
     public Transform firePoint;
     public GameObject player;
     public Animator animator; 
-    public Weapon[] weapons;
+    public List<Weapon> weapons;
+    public Weapon caneWeapon; 
     public GameObject multiplierPopup;
     public float[] fireRates; 
 
@@ -46,7 +47,7 @@ public class WeaponsManager : MonoBehaviour
 
         // -- set active weapon 
         int previousSelectedWeapon = selectedWeaponIndex; 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f && weapons.Count != 1)
         {
             // -- cancel shooting animation and cane loading animation on weapon change 
             animator.SetBool("isShooting", false);
@@ -62,7 +63,7 @@ public class WeaponsManager : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f && weapons.Count != 1)
         {
             // -- cancel shooting animation and cane loading animation on weapon change 
             animator.SetBool("isShooting", false);
@@ -117,6 +118,14 @@ public class WeaponsManager : MonoBehaviour
         }
 
 
+    }
+
+    public void AddWeapon(string weapon)
+    {
+        if(weapon == "SilkToCane")
+        {
+            weapons.Add(caneWeapon);
+        }
     }
 
     // -- CALLED AT END OF WEAPON SHOOTING ANIMATION DO NOT CALL MANUALLY 
