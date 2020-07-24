@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
+    // -- for singleton pattern 
     public static GameManager instance = null;
 
     private Array sceneArr; 
@@ -55,14 +56,32 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void LoadScene(int level)
+    {
+        SceneManager.LoadScene(sceneArr.GetValue(level).ToString());
+    }
+
+    // -- called by exit controller before SetActive is false for player 
+    public void SavePlayer(GameObject player)
+    {
+        // -- calls constructor in PlayerData 
+        SaveSystem.SavePlayer(player);
+    }
+
+    // -- called by entrance controller 
+    public void LoadPlayer(GameObject player)
+    {
+        PlayerData.LoadPlayerData(player); 
+    }
 
     public void LoadNextScene()
     {
         level += 1;
-        print(level);
         // -- assumes order is based on order in the Scene enum 
-        SceneManager.LoadScene(sceneArr.GetValue(level).ToString());
+        this.LoadScene(level);
     }
+
+
 
 
     public void ReloadScene()
@@ -70,5 +89,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public int GetLevelNumber()
+    {
+        return this.level; 
+    }
 
 }

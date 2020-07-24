@@ -9,21 +9,28 @@ public class ExitController : MonoBehaviour
     public float jumpForce; 
     public bool exitFacingRight;
 
-    public Animator doorAnimator; 
+    public Animator doorAnimator;
+
+    private bool triggered; 
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if(hitInfo.tag == "Player")
+        if(hitInfo.tag == "Player" && !triggered)
         {
+            triggered = true; 
+
             // -- EXIT ANIMATION -- 
             Rigidbody2D rb = hitInfo.GetComponent<Rigidbody2D>();
 
             // -- don't let them move 
             Controller2D controller = hitInfo.GetComponent<Controller2D>();
-            controller.enabled = false; 
+            controller.enabled = false;
+
+            // -- save player 
+            GameManager.instance.SavePlayer(hitInfo.gameObject);
 
             // -- flip them right direction depending on next level
-            if(controller.isFacingRight() != exitFacingRight)
+            if (controller.isFacingRight() != exitFacingRight)
             {
                 controller.Flip(); 
             }

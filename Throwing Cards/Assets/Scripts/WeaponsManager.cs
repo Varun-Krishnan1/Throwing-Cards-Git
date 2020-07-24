@@ -18,7 +18,8 @@ public class WeaponsManager : MonoBehaviour
     public float offset; 
 
     private int selectedWeaponIndex; 
-    private int curFireRateIndex; 
+    private int curFireRateIndex;
+    private float fireRateMultiplier; 
 
     private bool cardsFrozen = true;
 
@@ -163,6 +164,12 @@ public class WeaponsManager : MonoBehaviour
         // -- create popup saying new fire rate 
         //MultiplierPopupController multiplierPopupCon = multiplierPopup.GetComponent<MultiplierPopupController>();
         //multiplierPopupCon.Create(player.transform.position + new Vector3(0, 1.6f, 0), printString); ;
+    }
+
+    public float getFireRate()
+    {
+        return animator.GetFloat("cardThrowingSpeed"); 
+
     }
 
 

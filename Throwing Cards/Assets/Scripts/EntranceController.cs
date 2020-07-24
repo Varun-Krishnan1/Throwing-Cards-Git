@@ -37,9 +37,13 @@ public class EntranceController : MonoBehaviour
     // -- after time delay allow them to control character 
     IEnumerator StartScene(float time)
     {
+        GameManager.instance.LoadPlayer(player); 
+
         yield return new WaitForSeconds(time);
 
         player.GetComponent<Controller2D>().enabled = true; 
+
+
     }
 
 }
