@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1325533261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912764512933794945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1ee277b22eb8e42939b628b951a990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &765588317773585868
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -2432203541160495148, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -2432203541160495148, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -2432203541160495148, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: -2432203541160495148, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.40625
+      objectReference: {fileID: 0}
+    - target: {fileID: -2432203541160495148, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: -2432203541160495148, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 0.40625
+      objectReference: {fileID: 0}
+    - target: {fileID: -2432203541160495148, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -2432203541160495148, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -54.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064396, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6813655386194226390, guid: 381d30c3002a47b47a41e3d1e31766c5,
+        type: 3}
+    - target: {fileID: 4382851384127064396, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382851384127064397, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+        type: 3}
+      propertyPath: m_Name
+      value: ElbowSleeve
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4f0f0f95461e1b84cb10b423e2907d92, type: 3}
+--- !u!1 &3912764512933794945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4382851384127064397, guid: 4f0f0f95461e1b84cb10b423e2907d92,
+    type: 3}
+  m_PrefabInstance: {fileID: 765588317773585868}
+  m_PrefabAsset: {fileID: 0}
