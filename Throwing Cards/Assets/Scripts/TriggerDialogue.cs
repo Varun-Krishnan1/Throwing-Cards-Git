@@ -50,7 +50,6 @@ public class TriggerDialogue : MonoBehaviour
                     // -- if it still hasn't been triggered 
                     if(!objTrigger.isTriggered())
                     {
-                        print("HERE");
                         triggerChecksPassed = false; // -- then don't let any functions run 
                     }
                 }

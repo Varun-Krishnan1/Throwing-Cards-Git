@@ -43,9 +43,6 @@ public class WeaponsManager : MonoBehaviour
         // -- gives player ability to freeze and unfreeze objects 
         FreezeAbility();
 
-        // -- allow them to change speed pressing Q and E [TEMPORARY -> TO BECOME PICKED UP MULTIPLIER] 
-        ChangeSpeed();
-
         // -- set active weapon 
         int previousSelectedWeapon = selectedWeaponIndex; 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
@@ -128,9 +125,9 @@ public class WeaponsManager : MonoBehaviour
 
     }
 
-    private void ChangeFireSpeed(float factor)
+    public void ChangeFireSpeed(float factor)
     {
-        string printString = "";
+        string printString = "Fire rate permanently increased by ";
         float curSpeed = animator.GetFloat("cardThrowingSpeed");
 
         if (curSpeed == 8 && factor > 1)
@@ -159,27 +156,13 @@ public class WeaponsManager : MonoBehaviour
             }
 
             animator.SetFloat("cardThrowingSpeed", curSpeed * factor);
-            printString = (curSpeed * factor).ToString() + "x";
+            printString += (curSpeed * factor).ToString() + "x";
 
         }
 
         // -- create popup saying new fire rate 
-        MultiplierPopupController multiplierPopupCon = multiplierPopup.GetComponent<MultiplierPopupController>();
-        multiplierPopupCon.Create(player.transform.position + new Vector3(0, 1.6f, 0), printString); ;
-    }
-
-    public void ChangeSpeed()
-    {
-        if (Input.GetKeyDown("q"))
-        {
-            // -- double firing speed 
-            ChangeFireSpeed(2f); 
-        }
-        if (Input.GetKeyDown("e"))
-        {
-            // -- halve firing speed 
-            ChangeFireSpeed(.5f); 
-        }
+        //MultiplierPopupController multiplierPopupCon = multiplierPopup.GetComponent<MultiplierPopupController>();
+        //multiplierPopupCon.Create(player.transform.position + new Vector3(0, 1.6f, 0), printString); ;
     }
 
 
