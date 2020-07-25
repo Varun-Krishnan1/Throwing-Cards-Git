@@ -20,7 +20,8 @@ public class WeaponsManager : MonoBehaviour
 
     private int selectedWeaponIndex; 
     private int curFireRateIndex;
-    private float fireRateMultiplier; 
+    private float fireRateMultiplier;
+    private bool hasCane = false; 
 
     private bool cardsFrozen = true;
 
@@ -125,7 +126,17 @@ public class WeaponsManager : MonoBehaviour
         if(weapon == "SilkToCane")
         {
             weapons.Add(caneWeapon);
+            hasCane = true; 
         }
+        else
+        {
+            UnityEngine.Debug.LogError("Invalid argument to add weapon!"); 
+        }
+    }
+
+    public bool hasCaneInWeapons()
+    {
+        return hasCane; 
     }
 
     // -- CALLED AT END OF WEAPON SHOOTING ANIMATION DO NOT CALL MANUALLY 

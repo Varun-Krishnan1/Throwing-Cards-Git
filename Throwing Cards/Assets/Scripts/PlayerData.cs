@@ -7,7 +7,8 @@ using UnityEngine;
 public class PlayerData
 {
     public int level;
-    public float fireRateMultiplier; 
+    public float fireRateMultiplier;
+    public bool hasCane; 
 
     public PlayerData (GameObject player)
     {
@@ -16,7 +17,9 @@ public class PlayerData
         level = GameManager.instance.GetLevelNumber();
 
         // -- get data from player 
-        fireRateMultiplier = player.GetComponent<WeaponsManager>().getFireRate();
+        WeaponsManager weaponsManager = player.GetComponent<WeaponsManager>();
+        fireRateMultiplier = weaponsManager.getFireRate();
+        hasCane = weaponsManager.hasCaneInWeapons(); 
 
     }
 
@@ -26,5 +29,9 @@ public class PlayerData
 
         // -- set player variables 
         player.GetComponent<WeaponsManager>().ChangeFireSpeed(data.fireRateMultiplier);
+        if(data.hasCane)
+        {
+            player.GetComponent<WeaponsManager>().AddWeapon("SilkToCane");
+        }
     }
 }

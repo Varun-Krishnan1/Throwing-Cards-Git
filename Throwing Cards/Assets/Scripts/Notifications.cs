@@ -66,7 +66,7 @@ public class Notifications : MonoBehaviour
             // -- set global variable to next sentence 
             curNotification = curNotifications.Dequeue();
 
-            // -- clear text and reset animation 
+            // -- clear text
             notificationDisplay.text = "";
 
             // -- play text transition animation 
