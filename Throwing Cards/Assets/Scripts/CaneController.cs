@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class CaneController : CardController 
 {
@@ -11,9 +10,11 @@ public class CaneController : CardController
     [Header("Explosion")]
     public float explosionTimer = 3f;
     public float explosionRadius = 2f;
-    public float explosionLength = .2f;
     public float explosionForce = 10f;
-    public LayerMask layersToHit; 
+    public LayerMask layersToHit;
+    public ParticleSystem explosionEffect;
+    public Light2D caneLight; 
+
 
     private bool exploded = false;
     private bool hitEnemy = false;
@@ -98,17 +99,32 @@ public class CaneController : CardController
         // -- timer till it blows up 
         explosionTimer -= Time.deltaTime;
        
-        if (explosionTimer <= 0 && Mathf.Abs(explosionTimer) < explosionLength && !exploded)
+        if (explosionTimer <= 0 && !exploded)
         {
             // -- re-enable animation in case it was frozen  
-            gameObject.GetComponent<Animator>().enabled = true; 
+            // -- gameObject.GetComponent<Animator>().enabled = false;
+            gameObject.GetComponent<Animator>().enabled = false;
 
-            animator.SetBool("isExploding", true);
+            //animator.SetBool("isExploding", true);
+
+            // -- hide cane sprite and turn off light 
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = null;
+            caneLight.enabled = false; 
+
+            explosionEffect.Play();
+
+            var main = explosionEffect.main;
 
             this.Freeze();
+            
             Explode();
 
             exploded = true;
+
+
+            // -- destroy object after particle system effect ends 
+            Invoke("EndAnimation", main.duration);
+
         }
     }
 
@@ -152,6 +168,7 @@ public class CaneController : CardController
 
 
     }
+
     // -- override CaneController damage popup words to cane's 
     protected override void damagePopupEffect(Vector3 posit)
     {

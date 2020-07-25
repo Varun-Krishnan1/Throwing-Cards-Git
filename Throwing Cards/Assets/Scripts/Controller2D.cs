@@ -27,7 +27,7 @@ public class Controller2D : MonoBehaviour
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	private bool m_wasCrouching = false; // Whether or not the player was crouching 
-	const float k_CeilingRadius = 1f; // Radius of the overlap circle to determine if the player can stand up
+	const float k_CeilingRadius = .5f; // Radius of the overlap circle to determine if the player can stand up
 	private bool unPressedCrouch = false;
 	private float dynamicRadiusLength = .4f; 
 
