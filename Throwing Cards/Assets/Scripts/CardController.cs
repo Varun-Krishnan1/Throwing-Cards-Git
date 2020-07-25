@@ -143,7 +143,7 @@ public class CardController : MonoBehaviour
             ScreenShakeAndParticleImpactEffect(contact, true); 
 
             // -- call enemy takedamage() function 
-            enemy.TakeDamage(this.value);
+            enemy.TakeDamage(this.value, this.gameObject);
 
 
             // -- get the popup position of the collider it hits and put a popup of the damage there! 
@@ -178,17 +178,13 @@ public class CardController : MonoBehaviour
         }
     }
 
-    protected void objectStickingLogic(GameObject hitInfo, bool stickIntoEnemies)
+    protected void objectStickingLogic(GameObject hitInfo, bool stickToEnemies)
     {
         EnemyController enemy = hitInfo.gameObject.GetComponent<EnemyController>(); 
        
-        if(stickIntoEnemies && enemy != null)
+        if(stickToEnemies)
         {
-            // -- parent it to enemy so it sticks on them 
-            // this.transform.parent  = hitInfo.transform;   -- THIS NEEDS FIXING 
-            rb.isKinematic = true;
-            rb.velocity = Vector2.zero;
-
+            //this.transform.parent = hitInfo.transform.parent 
         }
 
         // -- if hits something with sprite renderer 
@@ -210,13 +206,15 @@ public class CardController : MonoBehaviour
         //col.isTrigger = false;
 
 
-        if(!stickIntoEnemies)
+        if (!stickToEnemies)
         {
             // -- don't let gravity and such affect it 
             this.Freeze();
-            // -- stop velocities and animation 
-            rb.velocity = Vector2.zero;
         }
+
+        // -- stop velocities and animation 
+        rb.velocity = Vector2.zero;
+
 
 
         // -- let player interact with it 

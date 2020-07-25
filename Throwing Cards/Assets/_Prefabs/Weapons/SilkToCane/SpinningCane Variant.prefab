@@ -39,16 +39,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  value: 10
+  value: 9
   suit: 
   scaleFactor: 0
   enemyPauseTime: 0
   rb: {fileID: 6958142125002625132}
   damagePopup: {fileID: 8937629203101364487, guid: 592a202c547aa5442b9c150a9621af16,
     type: 3}
-  cameraShakeStartIntensity: 0.5
-  cameraShakeScaleFactor: 0.02
-  cameraShakeDuration: 0.1
+  cameraShakeStartIntensity: 1
+  cameraShakeScaleFactor: 0.2
+  cameraShakeDuration: 0.2
   light: {fileID: 6155024184183585738}
   color1: {r: 0, g: 0, b: 0, a: 0}
   color2: {r: 0, g: 0, b: 0, a: 0}
@@ -263,12 +263,12 @@ PrefabInstance:
     - target: {fileID: 4786076664340258744, guid: 1ce70bf597e3a154b9f32c8683deac3e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -52.285713
+      value: -52.35572
       objectReference: {fileID: 0}
     - target: {fileID: 4786076664340258744, guid: 1ce70bf597e3a154b9f32c8683deac3e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52009535
+      value: -0.091333926
       objectReference: {fileID: 0}
     - target: {fileID: 4786076664340258744, guid: 1ce70bf597e3a154b9f32c8683deac3e,
         type: 3}

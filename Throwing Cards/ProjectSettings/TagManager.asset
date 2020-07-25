@@ -10,6 +10,7 @@ TagManager:
   - Exit
   - InteractableObject
   - Floor
+  - RoomGrid
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Wall
   - TriggerPoint
   - InsideBkgrdWall
-  - 
+  - Enemy
   - 
   - 
   - 

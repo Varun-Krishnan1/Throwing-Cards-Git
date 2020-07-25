@@ -15,7 +15,9 @@ public class CaneController : CardController
     public float explosionForce = 10f;
     public LayerMask layersToHit; 
 
-    private bool exploded = false; 
+    private bool exploded = false;
+    private bool hitEnemy = false;
+    private Vector3 enemyContactPoint; 
 
     // Start is called before the first frame update
     // -- base's start method not called at all now 
@@ -68,10 +70,19 @@ public class CaneController : CardController
 
     protected override void OnCollisionEnter2D(Collision2D collisionObject)
     {
-        if(!hitObject)
+        Vector3 contact = collisionObject.GetContact(0).point;
+
+        if (!hitObject && !exploded)
         {
             // -- stick into objects on collisiosn 
             objectStickingLogic(collisionObject.gameObject, true);      // -- same method that card controller uses 
+
+            if(collisionObject.gameObject.tag == "Enemy")
+            {
+                hitEnemy = true;
+                enemyContactPoint = contact;
+            }
+
             hitObject = true; 
         }
 
@@ -79,19 +90,25 @@ public class CaneController : CardController
 
     void Update()
     {
+        if(hitEnemy)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, enemyContactPoint, 1f);
+        }
+
         // -- timer till it blows up 
         explosionTimer -= Time.deltaTime;
-
-        if (explosionTimer <= 0 && Mathf.Abs(explosionTimer) < explosionLength)
+       
+        if (explosionTimer <= 0 && Mathf.Abs(explosionTimer) < explosionLength && !exploded)
         {
-            // -- re-enable animation in case it was stuck 
+            // -- re-enable animation in case it was frozen  
             gameObject.GetComponent<Animator>().enabled = true; 
 
             animator.SetBool("isExploding", true);
 
-            exploded = true;
             this.Freeze();
             Explode();
+
+            exploded = true;
         }
     }
 
@@ -102,6 +119,9 @@ public class CaneController : CardController
 
     public void Explode()
     {
+        // -- screen shake but don't destroy object 
+        StartCoroutine(pauseTime(enemyPauseTime, false));
+
         Collider2D[] objects = Physics2D.OverlapCircleAll(this.transform.position, explosionRadius, layersToHit); 
         
         foreach(Collider2D obj in objects)
@@ -112,18 +132,14 @@ public class CaneController : CardController
             Rigidbody2D rb = obj.gameObject.GetComponent<Rigidbody2D>();
             if (rb != null && obj.gameObject != gameObject && obj.gameObject.tag != "RoomGrid")
             {
-                print(rb); 
-                rb.AddForce(direction * explosionForce, ForceMode2D.Impulse);
-
-                // -- screen shake but don't destroy object 
-                //StartCoroutine(pauseTime(enemyPauseTime, false));
+               // rb.AddForce(direction * explosionForce, ForceMode2D.Impulse);
 
                 // -- do damage to enemies 
                 EnemyController enemy = obj.gameObject.GetComponent<EnemyController>();
 
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(this.value);
+                    enemy.TakeDamage(this.value, this.gameObject);
 
 
                     // -- get the popup position of the collider it hits and put a popup of the damage there! 

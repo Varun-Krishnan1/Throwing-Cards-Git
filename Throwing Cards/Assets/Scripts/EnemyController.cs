@@ -36,11 +36,15 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    public void TakeDamage(int damage)
+
+    public void TakeDamage(int damage, GameObject weapon)
     {
         // -- knockback 
         // -- used so not too much knockback 
-        rb.AddForce(new Vector2(knockbackForce, knockbackForce), ForceMode2D.Impulse); 
+
+        Vector2 direction = this.transform.position - weapon.transform.position;
+        rb.AddForce(direction * knockbackForce, ForceMode2D.Impulse);
+
 
 
         // -- take the actual damage 
