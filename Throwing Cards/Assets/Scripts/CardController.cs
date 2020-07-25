@@ -237,7 +237,7 @@ public class CardController : MonoBehaviour
         }
 
     }
-  
+
 
     public void Freeze()
     {

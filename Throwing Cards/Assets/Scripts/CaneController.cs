@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using UnityEngine;
 
 public class CaneController : CardController 
 {
+    public float explosionTimer = 3f;
+    public float explosionRadius = 2f;
+    public float explosionForce = 10f; 
+
+    private bool exploded = false; 
 
     // Start is called before the first frame update
     // -- base's start method not called at all now 
@@ -33,7 +39,7 @@ public class CaneController : CardController
     protected override void FixedUpdate()
     {
         // -- only scale if cane is not frozen or hasn't hit anything 
-        if (!hitObject && !cardFrozen)
+        if (!hitObject && !cardFrozen && !exploded)
         {
             // -- scale object and light until it hits something 
             this.transform.localScale += new Vector3(scaleFactor, scaleFactor, 0f);
@@ -51,14 +57,32 @@ public class CaneController : CardController
             particleTrailStartSize = particleTrailStartSize + particleTrailScaleFactor;
         }
 
+        if(!hitObject && !exploded)
+        {
+            // -- timer till it blows up 
+            explosionTimer -= Time.deltaTime; 
+            if(explosionTimer <= 0)
+            {
+                print("Boom!");
+                exploded = true;
+                Explode();
+            }
+
+}
+
     }
 
+    public void Explode()
+    {
+
+    }
     // -- override CaneController damage popup words to cane's 
     protected override void damagePopupEffect(Vector3 posit)
     {
         CardDamagePopupController damagePopupController = damagePopup.GetComponent<CardDamagePopupController>();
         damagePopupController.Create(posit, this.value, "NA");
     }
+
 
 
 }

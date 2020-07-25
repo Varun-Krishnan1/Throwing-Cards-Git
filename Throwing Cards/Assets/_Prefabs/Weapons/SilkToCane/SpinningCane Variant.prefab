@@ -42,6 +42,7 @@ MonoBehaviour:
   value: 10
   suit: 
   scaleFactor: 0
+  enemyPauseTime: 0
   rb: {fileID: 6958142125002625132}
   damagePopup: {fileID: 8937629203101364487, guid: 592a202c547aa5442b9c150a9621af16,
     type: 3}
@@ -118,7 +119,9 @@ MonoBehaviour:
   particleScaleFactor: 0.001
   particleEffectStartSize: 0
   suitSprites: []
-  base_damage: 0
+  explosionTimer: 0.5
+  explosionRadius: 2
+  explosionForce: 10
 --- !u!1001 &6155024185859538398
 PrefabInstance:
   m_ObjectHideFlags: 0

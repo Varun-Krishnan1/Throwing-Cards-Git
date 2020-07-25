@@ -283,7 +283,7 @@ public class Controller2D : MonoBehaviour
     {
 		// -- check for grounded 
 		m_Grounded = false;
-
+		
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
@@ -451,7 +451,7 @@ public class Controller2D : MonoBehaviour
 			// -- Move Animations 
 			animator.SetFloat("Speed", Mathf.Abs(move));
 
-			if (move > .01)
+			if (Mathf.Abs(move) > .01)
 			{
 				// -- cancel shooting animation and cane loading animation 
 				animator.SetBool("isShooting", false);
