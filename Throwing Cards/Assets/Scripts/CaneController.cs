@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using UnityEngine;
 
 public class CaneController : CardController 
 {
+    public Animator animator; 
+    [Header("Explosion")]
     public float explosionTimer = 3f;
     public float explosionRadius = 2f;
-    public float explosionForce = 10f; 
+    public float explosionLength = .2f;
+    public float explosionForce = 10f;
+    public LayerMask layersToHit; 
 
     private bool exploded = false; 
 
@@ -42,6 +47,7 @@ public class CaneController : CardController
         if (!hitObject && !cardFrozen && !exploded)
         {
             // -- scale object and light until it hits something 
+            // -- CAN'T SCALE BECAUSE ANIMATOR DOESN'T ALLOW IT 
             this.transform.localScale += new Vector3(scaleFactor, scaleFactor, 0f);
             light.pointLightOuterRadius += lightScaleFactor;
 
@@ -57,23 +63,77 @@ public class CaneController : CardController
             particleTrailStartSize = particleTrailStartSize + particleTrailScaleFactor;
         }
 
-        if(!hitObject && !exploded)
+
+    }
+
+    protected override void OnCollisionEnter2D(Collision2D collisionObject)
+    {
+        if(!hitObject)
         {
-            // -- timer till it blows up 
-            explosionTimer -= Time.deltaTime; 
-            if(explosionTimer <= 0)
-            {
-                print("Boom!");
-                exploded = true;
-                Explode();
-            }
+            // -- stick into objects on collisiosn 
+            objectStickingLogic(collisionObject.gameObject, true);      // -- same method that card controller uses 
+            hitObject = true; 
+        }
 
-}
+    }
 
+    void Update()
+    {
+        // -- timer till it blows up 
+        explosionTimer -= Time.deltaTime;
+
+        if (explosionTimer <= 0 && Mathf.Abs(explosionTimer) < explosionLength)
+        {
+            // -- re-enable animation in case it was stuck 
+            gameObject.GetComponent<Animator>().enabled = true; 
+
+            animator.SetBool("isExploding", true);
+
+            exploded = true;
+            this.Freeze();
+            Explode();
+        }
+    }
+
+    public void EndAnimation()
+    {
+        Destroy(gameObject); 
     }
 
     public void Explode()
     {
+        Collider2D[] objects = Physics2D.OverlapCircleAll(this.transform.position, explosionRadius, layersToHit); 
+        
+        foreach(Collider2D obj in objects)
+        {
+            Vector2 direction = obj.transform.position - transform.position;
+
+            // -- add force to objects 
+            Rigidbody2D rb = obj.gameObject.GetComponent<Rigidbody2D>();
+            if (rb != null && obj.gameObject != gameObject && obj.gameObject.tag != "RoomGrid")
+            {
+                print(rb); 
+                rb.AddForce(direction * explosionForce, ForceMode2D.Impulse);
+
+                // -- screen shake but don't destroy object 
+                //StartCoroutine(pauseTime(enemyPauseTime, false));
+
+                // -- do damage to enemies 
+                EnemyController enemy = obj.gameObject.GetComponent<EnemyController>();
+
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(this.value);
+
+
+                    // -- get the popup position of the collider it hits and put a popup of the damage there! 
+                    this.damagePopupEffect(obj.gameObject.transform.Find("PopupPosition").position);        // -- this is a function in this class 
+                }
+
+            }
+        }
+
+
 
     }
     // -- override CaneController damage popup words to cane's 
@@ -81,6 +141,12 @@ public class CaneController : CardController
     {
         CardDamagePopupController damagePopupController = damagePopup.GetComponent<CardDamagePopupController>();
         damagePopupController.Create(posit, this.value, "NA");
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius); 
     }
 
 

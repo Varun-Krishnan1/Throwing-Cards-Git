@@ -1140,7 +1140,17 @@ PrefabInstance:
     - target: {fileID: -6612464570173209670, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_Name
-      value: TestDummyEnemy
+      value: TestDummyEnemy Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: -6612464570173209670, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -6612464570173209670, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -5851378674663812317, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}

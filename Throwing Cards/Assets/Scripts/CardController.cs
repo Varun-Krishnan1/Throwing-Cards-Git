@@ -105,8 +105,12 @@ public class CardController : MonoBehaviour
     {
         if (!hitObject)
         {
+            print("Scaling...");
+            print(this.transform.localScale);
             // -- scale object and light until it hits something 
             this.transform.localScale += new Vector3(scaleFactor, scaleFactor, 0f);
+            print(this.transform.localScale);
+
             light.pointLightOuterRadius += lightScaleFactor;
 
             // -- scale camera shake 
@@ -124,7 +128,7 @@ public class CardController : MonoBehaviour
     }
 
     // -- changed from 
-    void OnCollisionEnter2D(Collision2D collisionObject)
+    protected virtual void OnCollisionEnter2D(Collision2D collisionObject)
     {
         GameObject hitInfo = collisionObject.gameObject;
         // -- get contact point 
@@ -153,9 +157,8 @@ public class CardController : MonoBehaviour
         // -- make object stick into object if it hits anything other than above if checks 
         else if (!hitObject)
         {
-
             // -- if hits interactable object add screen shake and particle impact effect 
-            if (collisionObject.gameObject.tag == "InteractableObject")
+            if (hitInfo.tag == "InteractableObject")
             {
                 ScreenShakeAndParticleImpactEffect(contact, true); 
             }
@@ -166,33 +169,8 @@ public class CardController : MonoBehaviour
             // -- turn off card glow  
             light.intensity = 0f;
 
-
-            // -- if hits something with sprite renderer 
-            if (hitInfo.GetComponent<SpriteRenderer>() != null)
-            {
-                // -- set sorting layer to one minus whatever it hits so illusion of stickign into object 
-                int hitSortingLayer = hitInfo.GetComponent<SpriteRenderer>().sortingOrder;
-                gameObject.GetComponent<SpriteRenderer>().sortingOrder = hitSortingLayer - 1;
-            }
-
-            // -- stop velocities and animation 
-            rb.velocity = Vector2.zero;
-            gameObject.GetComponent<Animator>().enabled = false;
-
-            BoxCollider2D col = gameObject.GetComponent<BoxCollider2D>();
-
-            // -- change collider size back to original 
-            col.size = colSize;
-
-            // -- remove isTrigger after hitting an object and just make it a normal collider 
-            //col.isTrigger = false;
-
-
-            // -- don't let gravity and such affect it 
-            this.Freeze();
-
-            // -- let player interact with it 
-            gameObject.layer = LayerMask.NameToLayer("Default");
+            objectStickingLogic(hitInfo, false); 
+           
 
             // -- set global variables 
             hitObject = true;
@@ -200,6 +178,50 @@ public class CardController : MonoBehaviour
         }
     }
 
+    protected void objectStickingLogic(GameObject hitInfo, bool stickIntoEnemies)
+    {
+        EnemyController enemy = hitInfo.gameObject.GetComponent<EnemyController>(); 
+       
+        if(stickIntoEnemies && enemy != null)
+        {
+            // -- parent it to enemy so it sticks on them 
+            // this.transform.parent  = hitInfo.transform;   -- THIS NEEDS FIXING 
+            rb.isKinematic = true;
+            rb.velocity = Vector2.zero;
+
+        }
+
+        // -- if hits something with sprite renderer 
+        if (hitInfo.GetComponent<SpriteRenderer>() != null)
+        {
+            // -- set sorting layer to one minus whatever it hits so illusion of stickign into object 
+            int hitSortingLayer = hitInfo.GetComponent<SpriteRenderer>().sortingOrder;
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = hitSortingLayer - 1;
+        }
+
+        gameObject.GetComponent<Animator>().enabled = false;
+
+        BoxCollider2D col = gameObject.GetComponent<BoxCollider2D>();
+
+        // -- change collider size back to original 
+        col.size = colSize;
+
+        // -- remove isTrigger after hitting an object and just make it a normal collider 
+        //col.isTrigger = false;
+
+
+        if(!stickIntoEnemies)
+        {
+            // -- don't let gravity and such affect it 
+            this.Freeze();
+            // -- stop velocities and animation 
+            rb.velocity = Vector2.zero;
+        }
+
+
+        // -- let player interact with it 
+        gameObject.layer = LayerMask.NameToLayer("Default");
+    }
     private void ScreenShakeAndParticleImpactEffect(Vector3 contactPoint, bool destroyObject)
     {
         // -- set particle impact sprite here so delay doesn't happen 
@@ -259,7 +281,7 @@ public class CardController : MonoBehaviour
         return !hitObject;
     }
 
-    IEnumerator pauseTime(float duration, bool destroyObject)
+    protected IEnumerator pauseTime(float duration, bool destroyObject)
     {
         Time.timeScale = 0f; 
         yield return new WaitForSecondsRealtime(duration);
