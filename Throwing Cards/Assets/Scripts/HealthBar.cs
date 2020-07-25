@@ -8,20 +8,16 @@ public class HealthBar : MonoBehaviour
 
     public Gradient gradient;
     public Image fill;
-    public Text healthCounter; 
+    public Text healthCounter;
+    public Slider slider; 
 
-    private Slider slider;
+
     private int maxHealth; 
     
-    // Start is called before the first frame update
-    void Awake()
-    {
-        slider = this.GetComponent<Slider>();
-    }
 
     public void SetMaxHealth(int health)
     {
-        maxHealth = health; 
+        maxHealth = health;
 
         slider.maxValue = health;
         this.SetHealth(maxHealth);

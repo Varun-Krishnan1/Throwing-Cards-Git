@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        animator = this.GetComponent<Animator>();
+        //animator = this.GetComponent<Animator>();
         healthBar.SetMaxHealth(health);
         player = GameObject.FindWithTag("Player");
 
@@ -32,31 +32,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float fHorizontalVelocity = rb.velocity.x;
-
-        // -- if enemy gets moved cause it to run and it hasn't been hit yet (second condition) 
-        if(fHorizontalVelocity > 0)
-        {
-            moveSpeed = moveSpeedWhenHit; 
-        }
-
-        if (!moveRight)
-        {
-            fHorizontalVelocity -= moveSpeed;
-
-        }
-        else
-        {
-            fHorizontalVelocity += moveSpeed;
-        }
-
-        fHorizontalVelocity *= (float)Math.Pow(1f - fHorizontalDampingWhenMoving, Time.fixedDeltaTime * 10f);
-
-
-
-        rb.velocity = new Vector2(fHorizontalVelocity, rb.velocity.y);
-
-        animator.SetFloat("speed", Math.Abs(fHorizontalVelocity));
 
 
     }
@@ -77,22 +52,6 @@ public class EnemyController : MonoBehaviour
             Die(); 
         }
 
-        // -- get direction player is facing 
-        bool player_facing_right = player.transform.rotation.y != -1;
-        bool this_facing_right = this.transform.rotation.y != 1;        // have to compare it to 1 because it's starts facing left... 
-        // -- start running when they get hit
-        moveSpeed = moveSpeedWhenHit;
-
-        print(player_facing_right);
-        print("E:" + this_facing_right);
-        // -- rotate if enemy not flacing player (i.e rotate if they're pointing in same direction) 
-        if (player_facing_right == this_facing_right)
-        {
-            print("Rotating to face player...");    
-            // -- rotate 
-            transform.Rotate(0, 180f, 0);
-            moveRight = true; 
-        }
 
     }
 
