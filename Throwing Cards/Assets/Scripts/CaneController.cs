@@ -18,7 +18,7 @@ public class CaneController : CardController
 
     private bool exploded = false;
     private bool hitEnemy = false;
-    private GameObject enemyHit; 
+    private Transform enemyHit; 
 
     // Start is called before the first frame update
     // -- base's start method not called at all now 
@@ -81,7 +81,7 @@ public class CaneController : CardController
             if(collisionObject.gameObject.tag == "Enemy")
             {
                 hitEnemy = true;
-                enemyHit = collisionObject.gameObject; 
+                enemyHit = collisionObject.gameObject.transform.Find("PopupPosition"); 
             }
 
             hitObject = true; 
@@ -93,7 +93,7 @@ public class CaneController : CardController
     {
         if(hitEnemy && enemyHit != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, enemyHit.transform.Find("PopupPosition").position, .1f);
+            transform.position = Vector3.MoveTowards(transform.position, enemyHit.position, .1f);
         }
 
         // -- timer till it blows up 
