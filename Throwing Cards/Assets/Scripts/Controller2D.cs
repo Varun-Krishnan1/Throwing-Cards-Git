@@ -142,6 +142,7 @@ public class Controller2D : MonoBehaviour
 			crouch = false;
 			unPressedCrouch = true;
 		}
+		print(animator.GetBool("isCrouching")); 
 	}
 
 	private void FixedUpdate()
