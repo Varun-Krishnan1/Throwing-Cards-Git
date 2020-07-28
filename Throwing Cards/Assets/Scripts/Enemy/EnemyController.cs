@@ -1,6 +1,7 @@
 ﻿using System; 
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -10,6 +11,11 @@ public class EnemyController : MonoBehaviour
     public float fHorizontalDampingWhenMoving;
     public float knockbackForce;
     public HealthBar healthBar;
+
+    [Header("Death Effect")]
+    public GameObject deathEffect;
+    public float offsetX;
+    public float offsetY; 
 
 
     private GameObject player;
@@ -63,6 +69,9 @@ public class EnemyController : MonoBehaviour
 
     public void Die()
     {
+        print(this.gameObject.transform.position);
+        GameObject e = Instantiate(deathEffect, new Vector3(transform.position.x + offsetX, transform.position.y + offsetY, 0), this.gameObject.transform.rotation);
+        print(e.transform.position);
         Destroy(gameObject);
     }
 

@@ -790,6 +790,10 @@ MonoBehaviour:
   fHorizontalDampingWhenMoving: 0.23
   knockbackForce: 5
   healthBar: {fileID: 2636217222859665689}
+  deathEffect: {fileID: 5045534759201205295, guid: 664155b2c5fce6844b16ba9121bce1e5,
+    type: 3}
+  offsetX: 45
+  offsetY: -0.72
 --- !u!114 &824912089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,7 +1144,7 @@ PrefabInstance:
     - target: {fileID: -6612464570173209670, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_Name
-      value: TestDummyEnemy
+      value: TestDummyEnemy Variant
       objectReference: {fileID: 0}
     - target: {fileID: -6612464570173209670, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}

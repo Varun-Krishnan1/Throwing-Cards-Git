@@ -103,11 +103,8 @@ public class CardController : MonoBehaviour
     {
         if (!hitObject)
         {
-            print("Scaling...");
-            print(this.transform.localScale);
             // -- scale object and light until it hits something 
             this.transform.localScale += new Vector3(scaleFactor, scaleFactor, 0f);
-            print(this.transform.localScale);
 
             light.pointLightOuterRadius += lightScaleFactor;
 
