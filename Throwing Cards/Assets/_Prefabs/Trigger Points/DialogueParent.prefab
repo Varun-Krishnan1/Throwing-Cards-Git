@@ -112,11 +112,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'What in the world
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 543538a1cb72dba44935b2ced65ff65e, type: 2}
-  m_sharedMaterial: {fileID: -5177544180888355051, guid: 543538a1cb72dba44935b2ced65ff65e,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 906c7fdbd7166c14d89803faae611d4c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -182,13 +183,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -1.0420461, w: 0}
   m_textInfo:
     textComponent: {fileID: 5705028462724917973}
-    characterCount: 0
+    characterCount: 18
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 4
+    wordCount: 4
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 1
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -459,7 +460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7679632001318148908}
   m_Layer: 0
-  m_Name: Dialogue
+  m_Name: DialogueParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

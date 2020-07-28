@@ -14,7 +14,7 @@ public class ElbowSleeve : MonoBehaviour
             col.gameObject.GetComponent<WeaponsManager>().ChangeFireSpeed(2);
 
             // -- display notification 
-            Notifications.instance.AddNotification("Fire rate permanently increased"); 
+            Notifications.instance.AddNotification("Elbow Sleeve Found: Fire rate permanently increased"); 
 
             // -- destroy self after collected 
             Destroy(gameObject); 

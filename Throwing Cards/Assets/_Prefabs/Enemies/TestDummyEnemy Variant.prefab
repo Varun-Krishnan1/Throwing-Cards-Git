@@ -1140,7 +1140,7 @@ PrefabInstance:
     - target: {fileID: -6612464570173209670, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_Name
-      value: TestDummyEnemy Variant
+      value: TestDummyEnemy
       objectReference: {fileID: 0}
     - target: {fileID: -6612464570173209670, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
@@ -1355,7 +1355,7 @@ PrefabInstance:
     - target: {fileID: 3653247724031460984, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3653247724031460984, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
@@ -1365,7 +1365,7 @@ PrefabInstance:
     - target: {fileID: 3653247724031460984, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3653247724031460984, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
