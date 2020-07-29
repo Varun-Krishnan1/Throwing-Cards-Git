@@ -4851,7 +4851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  value: 9
+  value: 10
   suit: 
   scaleFactor: 0
   enemyPauseTime: 0
