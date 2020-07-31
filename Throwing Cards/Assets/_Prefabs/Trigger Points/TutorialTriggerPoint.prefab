@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4681718110399870930}
   - component: {fileID: 4681718110399870929}
   - component: {fileID: 4681718110399870931}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TutorialTriggerPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

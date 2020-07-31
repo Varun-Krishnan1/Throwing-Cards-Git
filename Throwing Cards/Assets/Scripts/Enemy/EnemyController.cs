@@ -12,14 +12,25 @@ public class EnemyController : MonoBehaviour
     public float knockbackForce;
     public HealthBar healthBar;
 
+    [Header("Attacking")]
+    public LayerMask playerMask;
+    public float playerCheckDistance;
+    public Transform playerCheckPosition;
+    public float moveSpeedWhileCharging;
+    public float chargingTime; 
+    private bool charging;
+    private float currentChargingTime; 
+
     [Header("Movement")]
+    public Rigidbody2D rb;
     public float moveSpeed;
-    [Range(0, 1)] [SerializeField] private float fHorizontalDampingBasic = .22f;     // How much to smooth out the movement
     public Transform groundDetection;
     public float checkDistance;
     public bool movingRight = false;
+    public LayerMask wallMask;
+    public LayerMask groundMask;
+    private Vector2 dir; 
 
-    private Rigidbody2D rb;
 
 
     [Header("Death Effect")]
@@ -32,11 +43,18 @@ public class EnemyController : MonoBehaviour
 
 
     private Animator animator;
+
+    /* State Machine */
+    private State state;
+    private enum State
+    {
+        Normal,
+        Charging,
+    }
     // Start is called before the first frame update
     void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
-        //animator = this.GetComponent<Animator>();
+        animator = this.GetComponent<Animator>();
         healthBar.SetMaxHealth(health);
 
     }
@@ -45,35 +63,117 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, checkDistance);
-        RaycastHit2D wallInfo = Physics2D.Raycast(groundDetection.position, Vector2.right, checkDistance);
-        print(groundInfo.transform); 
-        if(groundInfo.collider == false)
-        {
-            print("Edge of surface");  
-            transform.Rotate(0, 180f, 0);
-            movingRight = !movingRight;
-        }
 
-        Move();
-    }
-
-    void Move()
-    {
-        float fHorizontalVelocity = rb.velocity.x;
-
-        
+        dir = Vector2.left;
         if (movingRight)
         {
-            fHorizontalVelocity += .5f;
+            dir = Vector2.right;
         }
-        else
+        // -- uses variable state that was obtained in UPDATE 
+        switch (state)
         {
-            fHorizontalVelocity -= .5f;
+            case State.Normal:
+
+                animator.SetBool("isCharging", false);
+
+                TurnLogic(); 
+
+                /* Stop and attack if player right in front */
+                RaycastHit2D playerInfo = Physics2D.Raycast(playerCheckPosition.position, dir, playerCheckDistance, playerMask);
+                if (playerInfo.collider != null )
+                {
+                    print("Attacking Player!");
+                    rb.velocity = Vector3.zero;
+                    animator.SetBool("isAttacking", true);
+                }
+                else
+                {
+                    Move(moveSpeed);
+                    animator.SetBool("isAttacking", false);
+                }
+
+                /* Charge if player in line of sight */
+                RaycastHit2D playerChargeInfo = Physics2D.Raycast(playerCheckPosition.position, dir, Mathf.Infinity, playerMask);
+                if (playerChargeInfo.collider != null && !charging)
+                {
+                    state = State.Charging;
+                    currentChargingTime = chargingTime; 
+                }
+
+                break; 
+            case State.Charging:
+                print("Saw Player!");
+                rb.velocity = Vector3.zero;
+                animator.SetBool("isCharging", true);
+
+                RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, checkDistance, groundMask);
+                RaycastHit2D wallInfo = Physics2D.Raycast(groundDetection.position, dir, checkDistance, wallMask);
+
+                print("Ground: " + groundInfo.transform);
+                print("Wall: " + wallInfo.transform);
+
+                if (currentChargingTime < 0)
+                {
+                    state = State.Normal; 
+                }
+                else if(groundInfo.collider == null || wallInfo.collider == true)
+                {
+                    rb.velocity = Vector3.zero;
+                    state = State.Normal; 
+                }
+                else 
+                {
+                    Move(moveSpeedWhileCharging);
+                }
+
+                currentChargingTime -= Time.fixedDeltaTime; 
+                break; 
         }
 
-        fHorizontalVelocity *= (float)Math.Pow(1f - fHorizontalDampingBasic, Time.deltaTime * 10f);
-        rb.velocity = new Vector2(fHorizontalVelocity, rb.velocity.y);
+
+
+
+
+
+
+    }
+
+    /* Returns true if enemy turns that frame */ 
+    private bool TurnLogic()
+    {
+        /* Rotate if hit wall or end of platform */
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, checkDistance, groundMask);
+        RaycastHit2D wallInfo = Physics2D.Raycast(groundDetection.position, dir, checkDistance, wallMask);
+        if (groundInfo.collider == false || wallInfo.collider == true)
+        {
+            print("Rotate called");
+            transform.Rotate(0, 180f, 0);
+            movingRight = !movingRight;
+            rb.velocity = Vector3.zero;
+
+            // get direction again 
+            dir = Vector2.left;
+            if (movingRight)
+            {
+                dir = Vector2.right;
+            }
+
+            return true; 
+        }
+
+        return false; 
+    }
+
+    void Move(float moveSpeed)
+    {
+        Vector2 dir = Vector2.left;
+
+        if (movingRight)
+        {
+            dir = Vector2.right; 
+        }
+
+        rb.velocity = dir * moveSpeed; 
     }
     
 
@@ -113,7 +213,7 @@ public class EnemyController : MonoBehaviour
     // -- attacking player 
     void OnCollisionEnter2D(Collision2D hitInfo)
     {
-        if(hitInfo.gameObject.tag == "Player")
+        if(hitInfo.gameObject.tag == "Player" && state == State.Charging)
         {
             hitInfo.gameObject.GetComponent<PlayerHealthController>().TakeDamage(100); 
         }

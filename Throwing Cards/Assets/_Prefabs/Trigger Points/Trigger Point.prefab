@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3625252048702981090}
   - component: {fileID: 3625252048702981093}
   - component: {fileID: 3625252048702981092}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: Trigger Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,3 +74,4 @@ MonoBehaviour:
   triggerAtTime: 0
   waitTimeBeforePlaying: 0
   onlyTriggerIfTheseTriggered: []
+  onlyTriggerIfTheseNotTriggered: []

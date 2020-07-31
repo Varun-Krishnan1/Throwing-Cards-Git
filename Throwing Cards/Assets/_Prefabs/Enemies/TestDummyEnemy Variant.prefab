@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 253747604}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LeftLegTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 466544135}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RightLegTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 478446099}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RightArmTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 508489628}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 544088058}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LeftArmTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 766267647}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LeftArmSolver_Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 982202307}
   - component: {fileID: 982202306}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LeftArmSolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1022123679}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LeftLegSolver_Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1469059121}
   - component: {fileID: 1469059120}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RightLegSolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1642157745}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RightArmSolver_Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,7 +375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1717450900}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RightLegSolver_Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -406,7 +406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1871370066}
   - component: {fileID: 1871370065}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LeftLegSolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2001379184}
   - component: {fileID: 2001379183}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RightArmSolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 5347814053585952783}
   - component: {fileID: 2435530056116555315}
   - component: {fileID: 7700679053071539904}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: EnemyHealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 6041454951022342944}
   - component: {fileID: 4090821570343711241}
   - component: {fileID: 2636217222859665689}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -819,11 +819,22 @@ MonoBehaviour:
   fHorizontalDampingWhenMoving: 0.23
   knockbackForce: 5
   healthBar: {fileID: 2636217222859665689}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  playerCheckDistance: 0
+  playerCheckPosition: {fileID: 0}
+  rb: {fileID: 0}
   moveSpeed: 1
-  fHorizontalDampingBasic: 0.555
   groundDetection: {fileID: 508489628}
   checkDistance: 0.05
   movingRight: 0
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 3895
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 3895
   deathEffect: {fileID: 5045534759201205295, guid: 664155b2c5fce6844b16ba9121bce1e5,
     type: 3}
   offsetX: 45
@@ -876,7 +887,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3247123941203530837}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LimbSolvers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -915,7 +926,7 @@ GameObject:
   - component: {fileID: 2613660499477967368}
   - component: {fileID: 1812842620173727343}
   - component: {fileID: 1286575654080835452}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -986,7 +997,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6268785391734051480}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PopupPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1018,7 +1029,7 @@ GameObject:
   - component: {fileID: 5674152511224661787}
   - component: {fileID: 7950011457550985372}
   - component: {fileID: 865982236741947333}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: HealthCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1095,7 +1106,7 @@ GameObject:
   - component: {fileID: 62983720199389364}
   - component: {fileID: 4627711849149073495}
   - component: {fileID: 422882363600067307}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1165,6 +1176,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9085525079166791081, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8366700667505909247, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8265998375614093071, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -8193766655278117425, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -1175,10 +1201,15 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.9928537
       objectReference: {fileID: 0}
+    - target: {fileID: -7350845221135886768, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -6612464570173209670, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_Name
-      value: TestDummyEnemy
+      value: TestDummyEnemy Variant
       objectReference: {fileID: 0}
     - target: {fileID: -6612464570173209670, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
@@ -1188,7 +1219,12 @@ PrefabInstance:
     - target: {fileID: -6612464570173209670, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -6599932086303535340, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -5851378674663812317, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
@@ -1210,6 +1246,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -191.16699
       objectReference: {fileID: 0}
+    - target: {fileID: -5627580803183109670, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -4965462396450338463, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -1225,6 +1266,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -18.599
       objectReference: {fileID: 0}
+    - target: {fileID: -4582166911932160873, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -4131851720840238895, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -1239,6 +1285,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -24.115002
+      objectReference: {fileID: 0}
+    - target: {fileID: -3741012046812239509, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -3467182038099957963, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
@@ -1279,6 +1330,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -158.09001
+      objectReference: {fileID: 0}
+    - target: {fileID: -2604429490935433387, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -2581945800818732090, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
@@ -1340,6 +1396,11 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.y
       value: 0.3200001
       objectReference: {fileID: 0}
+    - target: {fileID: -807035681648823673, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -186042296517122937, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -1360,6 +1421,21 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.y
       value: 0.32000083
       objectReference: {fileID: 0}
+    - target: {fileID: -64149770381657128, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 692227237132540165, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059780631657193775, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2226559074715520361, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -1379,6 +1455,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Bounds.m_Extent.y
       value: 0.35500017
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301489610693649617, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3653247724031460984, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}
@@ -1474,6 +1555,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Bounds.m_Extent.y
       value: 0.3600003
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253212632076435659, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994708292814670682, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173924415259296011, guid: 838a820511c894c44a220f2e8512e593,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7549878945700434218, guid: 838a820511c894c44a220f2e8512e593,
         type: 3}

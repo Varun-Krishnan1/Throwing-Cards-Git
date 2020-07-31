@@ -158,6 +158,8 @@ public class Controller2D : MonoBehaviour
 		switch (state)
         {
 			case State.Normal:
+				this.gameObject.layer = LayerMask.NameToLayer("Player");
+
 				// -- uses variables fJumpPressedRemember, groundedTimer, and jumpTimer that was obtained in UPDATE 
 				JumpingLogic();
 
@@ -182,6 +184,7 @@ public class Controller2D : MonoBehaviour
 
 	private void RollingLogic()
     {
+		this.gameObject.layer = LayerMask.NameToLayer("PlayerRolling");
 		float fHorizontalVelocity = m_Rigidbody2D.velocity.x;
 		animator.SetBool("isRolling", true);
 
