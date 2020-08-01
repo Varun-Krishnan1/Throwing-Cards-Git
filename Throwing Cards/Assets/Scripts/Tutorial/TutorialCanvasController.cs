@@ -16,7 +16,10 @@ public abstract class TutorialCanvasController : MonoBehaviour
     //protected Transform followTarget; 
     void Awake()
     {
-        textDisplay.text = text; 
+        if(text != "")
+        {
+            textDisplay.text = text;
+        }
     }
 
     protected void LateUpdate()
