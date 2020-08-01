@@ -214,6 +214,7 @@ public class Controller2D : MonoBehaviour
 			// -- if ceiling above when they're done rolling put them in crouch 
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
 			{
+				print("Put in crouch"); 
 				crouch = true;
 			}
 
