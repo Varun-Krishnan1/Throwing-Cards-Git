@@ -77,12 +77,12 @@ PrefabInstance:
     - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -50.1
+      value: -55.216278
       objectReference: {fileID: 0}
     - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: -3.5202227
       objectReference: {fileID: 0}
     - target: {fileID: 4382851384127064395, guid: 4f0f0f95461e1b84cb10b423e2907d92,
         type: 3}
@@ -168,7 +168,7 @@ PrefabInstance:
     - target: {fileID: 4382851384127064397, guid: 4f0f0f95461e1b84cb10b423e2907d92,
         type: 3}
       propertyPath: m_Name
-      value: SilkToCanePickup
+      value: SilkToCanePickup Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4382851384581148586, guid: 4f0f0f95461e1b84cb10b423e2907d92,
         type: 3}
