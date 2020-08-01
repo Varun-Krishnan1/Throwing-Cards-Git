@@ -61,6 +61,6 @@ public class ExitController : MonoBehaviour
     public void GoNextLevel()
     {
         GameManager.instance.LoadNextScene();
-    }
+    } 
 
 }
