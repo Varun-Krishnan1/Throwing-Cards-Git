@@ -17,7 +17,10 @@ public class EnemyController : MonoBehaviour
     public float playerCheckDistance;
     public Transform playerCheckPosition;
     public float moveSpeedWhileCharging;
-    public float chargingTime; 
+    public float chargingTime;
+    public Collider2D headCollider;
+    public Collider2D targetCollider; 
+
     private bool charging;
     private float currentChargingTime; 
 
@@ -73,6 +76,8 @@ public class EnemyController : MonoBehaviour
         switch (state)
         {
             case State.Normal:
+                headCollider.enabled = true;
+                targetCollider.enabled = true;
 
                 animator.SetBool("isCharging", false);
 
@@ -102,15 +107,17 @@ public class EnemyController : MonoBehaviour
 
                 break; 
             case State.Charging:
-                print("Saw Player!");
+                /* Disable head and circle collider */
+                headCollider.enabled = false;
+                targetCollider.enabled = false; 
+
+
                 rb.velocity = Vector3.zero;
                 animator.SetBool("isCharging", true);
 
                 RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, checkDistance, groundMask);
                 RaycastHit2D wallInfo = Physics2D.Raycast(groundDetection.position, dir, checkDistance, wallMask);
 
-                print("Ground: " + groundInfo.transform);
-                print("Wall: " + wallInfo.transform);
 
                 if (currentChargingTime < 0)
                 {

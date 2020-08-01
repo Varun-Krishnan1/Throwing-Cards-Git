@@ -130,19 +130,21 @@ public class CardController : MonoBehaviour
         Vector3 contact = collisionObject.GetContact(0).point;
 
        
-        EnemyController enemy = hitInfo.GetComponent<EnemyController>();
+        EnemyHitZone enemyHit = hitInfo.GetComponent<EnemyHitZone>();
+        print(hitInfo.tag); 
 
         // -- if hit enemy 
-        if (enemy != null && !hitObject)
+        if (enemyHit != null && !hitObject)
         {
-            ScreenShakeAndParticleImpactEffect(contact, true); 
+            ScreenShakeAndParticleImpactEffect(contact, true);
 
+            EnemyController enemy = enemyHit.transform.parent.GetComponent<EnemyController>(); 
             // -- call enemy takedamage() function 
             enemy.TakeDamage(this.value, this.gameObject);
 
 
             // -- get the popup position of the collider it hits and put a popup of the damage there! 
-            this.damagePopupEffect(hitInfo.gameObject.transform.Find("PopupPosition").position);        // -- this is a function in this class 
+            this.damagePopupEffect(enemy.gameObject.transform.Find("PopupPosition").position);        // -- this is a function in this class 
 
             // -- set global variable 
             hitObject = true;
@@ -153,7 +155,7 @@ public class CardController : MonoBehaviour
         else if (!hitObject)
         {
             // -- if hits interactable object add screen shake and particle impact effect 
-            if (hitInfo.tag == "InteractableObject")
+            if (hitInfo.tag == "InteractableObject" || hitInfo.tag == "Enemy")
             {
                 ScreenShakeAndParticleImpactEffect(contact, true); 
             }
