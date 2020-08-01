@@ -44,7 +44,7 @@ public class Controller2D : MonoBehaviour
 	public Animator animator;
 
 	private float jumpTimer = 0;				
-	private float jumpTimerTime = .2f;              // Amount of time before they are able to jump again after jumping (prevents spamming of jump) 
+	private float jumpTimerTime = .4f;              // Amount of time before they are able to jump again after jumping (prevents spamming of jump) 
 
 	private float groundedTimer = 0f;
 	private float groundedTimerTime = .05f;         // Allows for coyote jumping off platforms because it remembers when you were grounded for a small amount of time 

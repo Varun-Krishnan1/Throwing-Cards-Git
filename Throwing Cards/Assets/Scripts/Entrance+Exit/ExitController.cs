@@ -57,7 +57,7 @@ public class ExitController : MonoBehaviour
 
     }
 
-    // -- CALLED AT END OF DOOR ANIMATION DO NOT CALL MANUALLY 
+    // -- CALLED AT END OF DOOR ANIMATION FROM EXIT DOOR.CS DO NOT CALL MANUALLY 
     public void GoNextLevel()
     {
         GameManager.instance.LoadNextScene();
