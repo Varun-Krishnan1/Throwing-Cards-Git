@@ -26,6 +26,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.8911057, y: 0.357605}
   m_EdgeRadius: 0
+--- !u!114 &1880776699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389903505238111647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75826837f6fb8704c986b1059ac8e86c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRadius: 3
+  checkPosition: {fileID: 5580278599311796984}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  key: {fileID: 0}
+  keyText: {fileID: 0}
+  getToDoorText: {fileID: 0}
 --- !u!114 &4818091487132456709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39,33 +59,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numKeysRequired: 1
-  checkRadius: 10
+  checkRadius: 3
+  yRange: 4.5
+  moveUpSpeed: 0.05
   checkPosition: {fileID: 5580278599311796984}
   playerMask:
     serializedVersion: 2
     m_Bits: 256
-  animator: {fileID: 9204436608159999152}
   keyNotification: {fileID: 6001243941634289355}
---- !u!114 &1880776699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389903505238111647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75826837f6fb8704c986b1059ac8e86c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkRadius: 2
-  checkPosition: {fileID: 5580278599311796984}
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  key: {fileID: 0}
-  keyText: {fileID: 0}
-  getToDoorText: {fileID: 0}
 --- !u!1 &2276754831046114950
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6001243941634289396
 RectTransform:
   m_ObjectHideFlags: 0
@@ -457,11 +458,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExitController
       objectReference: {fileID: 0}
+    - target: {fileID: 890980963360046221, guid: 71c170e790adce8408ec3831619a7c29,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 1.4844317
+      objectReference: {fileID: 0}
+    - target: {fileID: 890980963360046221, guid: 71c170e790adce8408ec3831619a7c29,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 11.581604
+      objectReference: {fileID: 0}
     - target: {fileID: 890980963360046258, guid: 71c170e790adce8408ec3831619a7c29,
         type: 3}
       propertyPath: doorAnimator
       value: 
-      objectReference: {fileID: 9204436608159999152}
+      objectReference: {fileID: 0}
+    - target: {fileID: 890980963360046258, guid: 71c170e790adce8408ec3831619a7c29,
+        type: 3}
+      propertyPath: playerExitTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 890980963360046259, guid: 71c170e790adce8408ec3831619a7c29,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -574,7 +590,7 @@ PrefabInstance:
     - target: {fileID: 4619597420104012942, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.89499104
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 4619597420104012942, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96,
         type: 3}
@@ -621,6 +637,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4619597420104012942, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0250002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619597420104012942, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0000002
+      objectReference: {fileID: 0}
     - target: {fileID: 4619597420104012944, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96,
         type: 3}
       propertyPath: jumpForce
@@ -653,6 +679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4619597420104012945, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96, type: 3}
+    - {fileID: 4236081985916995004, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96, type: 3}
 --- !u!1 &389903505238111647 stripped
 GameObject:
@@ -663,12 +690,6 @@ GameObject:
 --- !u!4 &389903505238111618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4619597420104012942, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96,
-    type: 3}
-  m_PrefabInstance: {fileID: 5004955268656259340}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &9204436608159999152 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 4236081985916995004, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96,
     type: 3}
   m_PrefabInstance: {fileID: 5004955268656259340}
   m_PrefabAsset: {fileID: 0}

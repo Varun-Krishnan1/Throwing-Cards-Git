@@ -9,8 +9,6 @@ public class ExitController : MonoBehaviour
     public float jumpForce; 
     public bool exitFacingRight;
 
-    public Animator doorAnimator;
-
     private bool triggered; 
 
     void OnTriggerEnter2D(Collider2D hitInfo)
@@ -48,16 +46,15 @@ public class ExitController : MonoBehaviour
 
     IEnumerator LoadNextScene(GameObject player)
     {
-        yield return new WaitForSeconds(playerExitTime);
 
         player.SetActive(false);
 
-        doorAnimator.SetBool("isSliding", true); 
-        
+        yield return new WaitForSeconds(playerExitTime);
+
+        GoNextLevel(); 
 
     }
 
-    // -- CALLED AT END OF DOOR ANIMATION FROM EXIT DOOR.CS DO NOT CALL MANUALLY 
     public void GoNextLevel()
     {
         GameManager.instance.LoadNextScene();
