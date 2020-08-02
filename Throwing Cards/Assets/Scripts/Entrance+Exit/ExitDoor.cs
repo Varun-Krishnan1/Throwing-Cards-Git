@@ -9,6 +9,7 @@ public class ExitDoor : MonoBehaviour
     public Transform checkPosition; 
     public LayerMask playerMask;
     public Animator animator;
+    public GameObject keyNotification; 
     private ExitController exitController; 
 
     private int numKeys; 
@@ -20,14 +21,26 @@ public class ExitDoor : MonoBehaviour
     void Update()
     {
         /* If player in circle radius and number of keys gotten on map is equal to keys required */
-        if (Physics2D.OverlapCircle(checkPosition.position, checkRadius, playerMask) && numKeys == numKeysRequired)
+        if (Physics2D.OverlapCircle(checkPosition.position, checkRadius, playerMask))
         {
-            animator.SetBool("doorOpening", true);
+            if (numKeys == numKeysRequired)
+            {
+                animator.SetBool("doorOpening", true);
+                keyNotification.SetActive(false);
+
+            }
+            else
+            {
+                animator.SetBool("doorOpening", false);
+                keyNotification.SetActive(true); 
+            }
         }
         else
         {
             animator.SetBool("doorOpening", false);
+            keyNotification.SetActive(false);
         }
+
     }
 
     /* Called by Key */ 
