@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    public ExitDoor door; 
+    public ExitDoor door;
 
+    private bool triggered = false; 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "Player")
+        if(col.gameObject.tag == "Player" && !triggered)
         {
+            triggered = true;
+
             door.AddKey();
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
     }
 }

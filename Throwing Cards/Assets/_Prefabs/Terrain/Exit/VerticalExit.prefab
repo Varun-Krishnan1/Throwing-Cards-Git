@@ -26,26 +26,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.8911057, y: 0.357605}
   m_EdgeRadius: 0
---- !u!114 &1880776699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389903505238111647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75826837f6fb8704c986b1059ac8e86c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkRadius: 3
-  checkPosition: {fileID: 5580278599311796984}
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  key: {fileID: 0}
-  keyText: {fileID: 0}
-  getToDoorText: {fileID: 0}
 --- !u!114 &4818091487132456709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,8 +38,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc93092daa804f4b801b63b7fb1ff03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontal: 0
   numKeysRequired: 1
-  checkRadius: 3
+  checkRadius: 10
   yRange: 4.5
   moveUpSpeed: 0.05
   checkPosition: {fileID: 5580278599311796984}
@@ -675,7 +656,7 @@ PrefabInstance:
     - target: {fileID: 4619597420104012947, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96,
         type: 3}
       propertyPath: m_Name
-      value: Exit Vertical
+      value: VerticalExit
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4619597420104012945, guid: 88b85ec6c2854bb4dafe27f5a6ec8e96, type: 3}

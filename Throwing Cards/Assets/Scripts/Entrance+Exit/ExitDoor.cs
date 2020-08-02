@@ -24,8 +24,9 @@ public class ExitDoor : MonoBehaviour
     {
         exitController = (ExitController)FindObjectOfType(typeof(ExitController));
     }
-    void FixedUpdate()
+    void Update()
     {
+        print(numKeys); 
         if(!originalObtained)
         {
             original = this.transform.position;
