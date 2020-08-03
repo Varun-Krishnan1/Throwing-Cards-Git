@@ -44,11 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d9d5a4724378384cbd9c1480a56a566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerExitTime: 0.1
+  playerExitTime: 4
   exitSpeed: 1
   jumpForce: 200
   exitFacingRight: 1
-  doorAnimator: {fileID: 0}
 --- !u!61 &890980963360046221
 BoxCollider2D:
   m_ObjectHideFlags: 0
