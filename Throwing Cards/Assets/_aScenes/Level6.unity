@@ -76032,7 +76032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 691982636, guid: 4088d6de811808c46b976d298ce63dd6, type: 3}
       propertyPath: minHitSpeed
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1123894118709079390, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
