@@ -26,7 +26,6 @@ public class ExitDoor : MonoBehaviour
     }
     void Update()
     {
-        print(numKeys); 
         if(!originalObtained)
         {
             original = this.transform.position;
@@ -68,9 +67,6 @@ public class ExitDoor : MonoBehaviour
             originalPos = original.x; 
         }
 
-        print(originalPos);
-        print(after);
-        print(Mathf.Abs(originalPos - after));
         if (Mathf.Abs(originalPos - after) <= yRange)
         {
             if(horizontal)
