@@ -42,9 +42,6 @@ public class PressureDoor : MonoBehaviour
             originalPos = original.x;
         }
 
-        print(originalPos);
-        print(after);
-        print(Mathf.Abs(originalPos - after));
         if (Mathf.Abs(originalPos - after) <= yRange)
         {
             if (horizontal)

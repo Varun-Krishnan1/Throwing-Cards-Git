@@ -1557,7 +1557,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.04766039, y: 0.3729424}
-  m_ConnectedAnchor: {x: -0.044596463, y: 0.33376518}
+  m_ConnectedAnchor: {x: -0.044597026, y: 0.33376572}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -2216,7 +2216,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.04702985, y: 0.5084511}
-  m_ConnectedAnchor: {x: -34.894897, y: -9.220699}
+  m_ConnectedAnchor: {x: -36.564896, y: -9.2807}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -9153,7 +9153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385761071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -38.42, y: -12.43, z: 0}
+  m_LocalPosition: {x: -38.42, y: -13.43, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9189,7 +9189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushForce: 50
   pushTimerTime: 0.5
-  openTimerTime: 0.25
+  openTimerTime: 0.5
   door: {fileID: 2066897190}
 --- !u!1 &1401888053
 GameObject:
@@ -9308,7 +9308,7 @@ PrefabInstance:
     - target: {fileID: 1225349212717844078, guid: fde15d9a6eb46b040bc8879ea3ce7e6f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -36.58
+      value: -37.57
       objectReference: {fileID: 0}
     - target: {fileID: 1225349212717844078, guid: fde15d9a6eb46b040bc8879ea3ce7e6f,
         type: 3}
@@ -76028,7 +76028,7 @@ PrefabInstance:
       objectReference: {fileID: 691982634}
     - target: {fileID: 691982636, guid: 4088d6de811808c46b976d298ce63dd6, type: 3}
       propertyPath: chainForce
-      value: 5000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 691982636, guid: 4088d6de811808c46b976d298ce63dd6, type: 3}
       propertyPath: minHitSpeed
@@ -76037,22 +76037,22 @@ PrefabInstance:
     - target: {fileID: 1123894118709079390, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -34.08188
+      value: -36.579628
       objectReference: {fileID: 0}
     - target: {fileID: 1123894118709079390, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -9.139232
+      value: -9.329921
       objectReference: {fileID: 0}
     - target: {fileID: 1123980892527230300, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.06731761
+      value: -0.06731751
       objectReference: {fileID: 0}
     - target: {fileID: 1123980892527230300, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.08974656
+      value: 0.08974644
       objectReference: {fileID: 0}
     - target: {fileID: 1123980892527230300, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
@@ -76062,12 +76062,12 @@ PrefabInstance:
     - target: {fileID: 1207401233022647564, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.040800296
+      value: -0.0408002
       objectReference: {fileID: 0}
     - target: {fileID: 1207401233022647564, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.32804742
+      value: 0.32804757
       objectReference: {fileID: 0}
     - target: {fileID: 1207401233022647564, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
@@ -76087,12 +76087,12 @@ PrefabInstance:
     - target: {fileID: 3246008179152357108, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -27.31
+      value: -28.98
       objectReference: {fileID: 0}
     - target: {fileID: 3246008179152357108, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.78
+      value: -10.84
       objectReference: {fileID: 0}
     - target: {fileID: 3246008179152357108, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
@@ -76147,12 +76147,12 @@ PrefabInstance:
     - target: {fileID: 4700213423945914491, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.040545452
+      value: -0.040545627
       objectReference: {fileID: 0}
     - target: {fileID: 4700213423945914491, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.31243342
+      value: 0.31243375
       objectReference: {fileID: 0}
     - target: {fileID: 4700213423945914491, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
@@ -76162,22 +76162,22 @@ PrefabInstance:
     - target: {fileID: 5419442091066514531, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -34.706085
+      value: -35.91886
       objectReference: {fileID: 0}
     - target: {fileID: 5419442091066514531, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -9.7593975
+      value: -9.910974
       objectReference: {fileID: 0}
     - target: {fileID: 6881768974979390074, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.06660688
+      value: -0.06660689
       objectReference: {fileID: 0}
     - target: {fileID: 6881768974979390074, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.10895809
+      value: 0.10895778
       objectReference: {fileID: 0}
     - target: {fileID: 6881768974979390074, guid: 4088d6de811808c46b976d298ce63dd6,
         type: 3}
@@ -76187,6 +76187,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 61338983, guid: 4088d6de811808c46b976d298ce63dd6, type: 3}
     - {fileID: 61338984, guid: 4088d6de811808c46b976d298ce63dd6, type: 3}
+    - {fileID: 1123894118709079390, guid: 4088d6de811808c46b976d298ce63dd6, type: 3}
+    - {fileID: 5419442091066514531, guid: 4088d6de811808c46b976d298ce63dd6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4088d6de811808c46b976d298ce63dd6, type: 3}
 --- !u!50 &3246008179209040788 stripped
 Rigidbody2D:

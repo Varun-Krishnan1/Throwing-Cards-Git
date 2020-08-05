@@ -14,7 +14,6 @@ public class Chain : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        rb.angularVelocity = Mathf.Infinity; 
     }
 
     void FixedUpdate()
