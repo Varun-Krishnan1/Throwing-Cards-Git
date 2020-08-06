@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     public enum Scene
     {
-        Level0, Level1, Level2, Level3, Level5, Level6, Level7, Level8, Level20, Level70 
+        StartMenu, Level0, Level1, Level2, Level3, Level5, Level6, Level7, Level8, Level20, Level70 
     }
 
 
@@ -81,7 +81,10 @@ public class GameManager : MonoBehaviour
         this.LoadScene(level);
     }
 
-
+    public PlayerData GetSaveData()
+    {
+        return SaveSystem.LoadPlayer(); 
+    }
 
 
     public void ReloadScene()
