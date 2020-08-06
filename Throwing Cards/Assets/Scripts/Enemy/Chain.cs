@@ -8,12 +8,17 @@ using UnityEngine;
 public class Chain : MonoBehaviour
 {
     public float chainForce;
-    public float minHitSpeed; 
+    public float minHitSpeed;
+    public bool facingRight = false; 
     public Rigidbody2D rb; 
 
     // Start is called before the first frame update
     void Awake()
     {
+        if(facingRight)
+        {
+            chainForce = -chainForce; 
+        }
     }
 
     void FixedUpdate()
@@ -25,7 +30,7 @@ public class Chain : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player" && rb.velocity.x > minHitSpeed)
+        if(collision.gameObject.tag == "Player" && (rb.velocity.x > minHitSpeed || rb.velocity.y > minHitSpeed))
         {
             collision.gameObject.GetComponent<PlayerHealthController>().TakeDamage(100);
         }

@@ -7,11 +7,19 @@ public class PressurePlate : MonoBehaviour
 {
     public float pushForce;
     public float pushTimerTime;
-    public float openTimerTime; 
+    public float openTimerTime;
+    public bool pushLeft = false; 
     public PressureDoor door; 
     private float pushTimer;
     private float openTimer; 
 
+    void Awake()
+    {
+        if(pushLeft)
+        {
+            pushForce = -pushForce; 
+        }
+    }
     void FixedUpdate()
     {
         pushTimer -= Time.fixedDeltaTime;
