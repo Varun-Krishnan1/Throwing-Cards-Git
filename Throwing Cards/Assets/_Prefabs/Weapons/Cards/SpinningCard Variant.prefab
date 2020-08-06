@@ -4905,8 +4905,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  value: 10
-  suit: 
+  value: 5
+  suit: Suit2
   scaleFactor: 0.1
   enemyPauseTime: 0.2
   rb: {fileID: 3889773653867294130}
@@ -5070,7 +5070,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7679ba1e7152d7f41ac476a72df47736,
+      objectReference: {fileID: 21300000, guid: beac392aaf46c6047a4eb7c428413255,
         type: 3}
     - target: {fileID: 8770764608845291169, guid: ed829f42dd842154297e25c0531976c5,
         type: 3}

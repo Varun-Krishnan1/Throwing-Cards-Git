@@ -8,21 +8,26 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject player;
     public ContinueButton continueButton; 
-    private PlayerData saveInfo; 
-    void Awake()
+    private PlayerData saveInfo;
+
+    private bool notCalled; 
+
+    void Update()
     {
-        saveInfo = GameManager.instance.GetSaveData();
-        if (saveInfo != null)
+        if(notCalled)
         {
-            continueButton.gameObject.SetActive(true); 
+            saveInfo = GameManager.instance.GetSaveData();
+            if (saveInfo != null)
+            {
+                continueButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                continueButton.gameObject.SetActive(false);
+            }
+            notCalled = false; 
         }
-        else
-        {
-            continueButton.gameObject.SetActive(false);
-        }
-
     }
-
     public void NewGame()
     {
         // -- create save file with empty stats 

@@ -98,6 +98,21 @@ public class CardWeapon : Weapon
         setRandomCard(); 
     }
 
+    // -- TO BE USED BY START MENU CHARACTER ONLY! 
+    public void ShootStartMenu(GameObject fancyCard)
+    {
+        Instantiate(fancyCard, firePoint.position, firePoint.rotation);
+
+        // set sprite of card thrown to next card's sprite stored globally 
+        fancyCard.GetComponent<SpriteRenderer>().sprite = nextCard.sprite;
+
+        // -- set attributes of the card using nextcard struct stored from setrandomcard() 
+        fancyCard.GetComponent<CardController>().value = nextCard.value;
+        fancyCard.GetComponent<CardController>().suit = nextCard.suit;
+
+        setRandomCard();
+    }
+
     public override float getFireRateTime()
     {
         return this.fireRateTime; 

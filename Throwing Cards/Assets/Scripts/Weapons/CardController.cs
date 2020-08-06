@@ -283,9 +283,12 @@ public class CardController : MonoBehaviour
         Time.timeScale = 1f;
 
         // -- camera shake 
-        CameraShake.Instance.ShakeCamera(cameraShakeStartIntensity, cameraShakeDuration);
+        if(CameraShake.Instance != null)
+        {
+            CameraShake.Instance.ShakeCamera(cameraShakeStartIntensity, cameraShakeDuration);
+        }
 
-        if(destroyObject)
+        if (destroyObject)
         {
             // -- NOW destroy object 
             Destroy(gameObject);
