@@ -46,6 +46,7 @@ public class ExitController : MonoBehaviour
 
     IEnumerator LoadNextScene(GameObject player)
     {
+        yield return new WaitForSeconds(.1f);
 
         player.SetActive(false);
 

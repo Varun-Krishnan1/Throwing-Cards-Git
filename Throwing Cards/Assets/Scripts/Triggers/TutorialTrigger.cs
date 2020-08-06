@@ -8,6 +8,13 @@ public class TutorialTrigger : MonoBehaviour
 
     private bool triggered = false; 
 
+    void Awake()
+    {
+        if(!triggered)
+        {
+            tutorial.gameObject.SetActive(false);
+        }
+    }
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "Player" && !triggered)

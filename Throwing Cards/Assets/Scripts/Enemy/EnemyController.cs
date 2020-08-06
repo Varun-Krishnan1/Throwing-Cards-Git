@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public float fHorizontalDampingWhenMoving;
     public float knockbackForce;
     public HealthBar healthBar;
+    public bool stationary = false; 
 
     [Header("Attacking")]
     public LayerMask playerMask;
@@ -66,75 +67,77 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        dir = Vector2.left;
-        if (movingRight)
+        if(!stationary)
         {
-            dir = Vector2.right;
-        }
-        // -- uses variable state that was obtained in UPDATE 
-        switch (state)
-        {
-            case State.Normal:
-                headCollider.enabled = true;
-                targetCollider.enabled = true;
+            dir = Vector2.left;
+            if (movingRight)
+            {
+                dir = Vector2.right;
+            }
+            // -- uses variable state that was obtained in UPDATE 
+            switch (state)
+            {
+                case State.Normal:
+                    headCollider.enabled = true;
+                    targetCollider.enabled = true;
 
-                animator.SetBool("isCharging", false);
+                    animator.SetBool("isCharging", false);
 
-                TurnLogic(); 
+                    TurnLogic();
 
-                /* Stop and attack if player right in front */
-                RaycastHit2D playerInfo = Physics2D.Raycast(playerCheckPosition.position, dir, playerCheckDistance, playerMask);
-                if (playerInfo.collider != null )
-                {
-                    print("Attacking Player!");
+                    /* Stop and attack if player right in front */
+                    RaycastHit2D playerInfo = Physics2D.Raycast(playerCheckPosition.position, dir, playerCheckDistance, playerMask);
+                    if (playerInfo.collider != null)
+                    {
+                        print("Attacking Player!");
+                        rb.velocity = Vector3.zero;
+                        animator.SetBool("isAttacking", true);
+                    }
+                    else
+                    {
+                        Move(moveSpeed);
+                        animator.SetBool("isAttacking", false);
+                    }
+
+                    /* Charge if player in line of sight */
+                    RaycastHit2D playerChargeInfo = Physics2D.Raycast(playerCheckPosition.position, dir, Mathf.Infinity, playerMask);
+                    if (playerChargeInfo.collider != null && !charging)
+                    {
+                        state = State.Charging;
+                        currentChargingTime = chargingTime;
+                    }
+
+                    break;
+                case State.Charging:
+                    /* Disable head and circle collider */
+                    headCollider.enabled = false;
+                    targetCollider.enabled = false;
+
+
                     rb.velocity = Vector3.zero;
-                    animator.SetBool("isAttacking", true);
-                }
-                else
-                {
-                    Move(moveSpeed);
-                    animator.SetBool("isAttacking", false);
-                }
+                    animator.SetBool("isCharging", true);
 
-                /* Charge if player in line of sight */
-                RaycastHit2D playerChargeInfo = Physics2D.Raycast(playerCheckPosition.position, dir, Mathf.Infinity, playerMask);
-                if (playerChargeInfo.collider != null && !charging)
-                {
-                    state = State.Charging;
-                    currentChargingTime = chargingTime; 
-                }
-
-                break; 
-            case State.Charging:
-                /* Disable head and circle collider */
-                headCollider.enabled = false;
-                targetCollider.enabled = false; 
+                    RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, checkDistance, groundMask);
+                    RaycastHit2D wallInfo = Physics2D.Raycast(groundDetection.position, dir, checkDistance, wallMask);
 
 
-                rb.velocity = Vector3.zero;
-                animator.SetBool("isCharging", true);
+                    if (currentChargingTime < 0)
+                    {
+                        state = State.Normal;
+                    }
+                    else if (groundInfo.collider == null || wallInfo.collider == true)
+                    {
+                        rb.velocity = Vector3.zero;
+                        state = State.Normal;
+                    }
+                    else
+                    {
+                        Move(moveSpeedWhileCharging);
+                    }
 
-                RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, checkDistance, groundMask);
-                RaycastHit2D wallInfo = Physics2D.Raycast(groundDetection.position, dir, checkDistance, wallMask);
-
-
-                if (currentChargingTime < 0)
-                {
-                    state = State.Normal; 
-                }
-                else if(groundInfo.collider == null || wallInfo.collider == true)
-                {
-                    rb.velocity = Vector3.zero;
-                    state = State.Normal; 
-                }
-                else 
-                {
-                    Move(moveSpeedWhileCharging);
-                }
-
-                currentChargingTime -= Time.fixedDeltaTime; 
-                break; 
+                    currentChargingTime -= Time.fixedDeltaTime;
+                    break;
+            }
         }
 
 
