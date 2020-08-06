@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    public GameObject pauseMenu;
     public static bool gameIsPaused = false;
-    private GameObject pauseMenu;
-
-
-    void Awake()
-    {
-        pauseMenu = GameObject.FindWithTag("MainCanvas"); 
-    }
-
 
     void Update()
     {
         // -- allow reloading of scene with r 
         if (Input.GetKeyDown("r"))
         {
+            if(gameIsPaused)
+            {
+                Resume(); 
+            }
             GameManager.instance.ReloadScene();
         }
 
@@ -40,7 +37,9 @@ public class PauseMenu : MonoBehaviour
         {
             if (Input.GetKeyDown("q"))
             {
-                Application.Quit(); 
+                Resume(); 
+                // -- go to start menu 
+                GameManager.instance.LoadScene(0); 
             }
         }
     }

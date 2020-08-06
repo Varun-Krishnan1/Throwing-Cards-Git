@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(int level)
     {
+        this.level = level; 
         SceneManager.LoadScene(sceneArr.GetValue(level).ToString());
     }
 
