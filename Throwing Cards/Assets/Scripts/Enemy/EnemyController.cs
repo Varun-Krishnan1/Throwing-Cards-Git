@@ -154,7 +154,7 @@ public class EnemyController : MonoBehaviour
         /* Rotate if hit wall or end of platform */
         RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, checkDistance, groundMask);
         RaycastHit2D wallInfo = Physics2D.Raycast(groundDetection.position, dir, checkDistance, wallMask);
-        if (groundInfo.collider == false || wallInfo.collider == true)
+        if ((groundInfo.collider == false || wallInfo.collider == true) && wallInfo.transform.gameObject.tag != "ThrownPlayerCard")
         {
             print("Rotate called");
             transform.Rotate(0, 180f, 0);
