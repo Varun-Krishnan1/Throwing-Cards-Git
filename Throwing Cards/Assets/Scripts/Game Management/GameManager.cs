@@ -34,15 +34,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        // -- allow reloading of scene with r 
-        if (Input.GetKeyDown("r"))
-        {
-            GameManager.instance.ReloadScene();
-        }
-    }
-
     public enum Scene
     {
         StartMenu, Level0, Level1, Level2, Level3, Level5, Level6, Level7, Level8, Level20, Level70 
