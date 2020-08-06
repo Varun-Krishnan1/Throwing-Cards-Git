@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     public enum Scene
     {
-        Level0, Level1, Level2, Level3, Level5, Level6, Level7, Level8, Level9, Level10, Level11, Level12, Level13 
+        Level0, Level1, Level2, Level3, Level5, Level6, Level7, Level8, Level20, Level70 
     }
 
 
