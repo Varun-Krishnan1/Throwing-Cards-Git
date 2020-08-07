@@ -81,7 +81,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: CardThrow
-    clip: {fileID: 8300000, guid: 6934f5d442b40c84b81f112ba6da4f41, type: 3}
+    clip: {fileID: 8300000, guid: 788cd1a0a96b4bd469d53713cad9cb07, type: 3}
     volume: 0.5
     pitch: 0.8
     loop: 0
@@ -118,6 +118,18 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: EnemyMetal
     clip: {fileID: 8300000, guid: 0c9a3f463ac26984db96d1e0c52a5317, type: 3}
+    volume: 0.75
+    pitch: 1.05
+    loop: 0
+    source: {fileID: 0}
+  - name: PressurePlate
+    clip: {fileID: 8300000, guid: 9e72716e8c1f0494782314f4c4874cb1, type: 3}
+    volume: 0.75
+    pitch: 1.05
+    loop: 0
+    source: {fileID: 0}
+  - name: PressureDoorOpen
+    clip: {fileID: 8300000, guid: d5b9075f535c66648b5c3630354b88de, type: 3}
     volume: 0.75
     pitch: 1.05
     loop: 0

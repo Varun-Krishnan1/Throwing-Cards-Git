@@ -6,12 +6,12 @@ public class PressureDoor : MonoBehaviour
 {
     public bool horizontal = false;
     public float yRange;
-    public float moveSpeed; 
+    public float moveSpeed;
 
     private bool originalObtained = false;
     private bool doorOpened = false;
-    private Vector3 original; 
-    
+    private Vector3 original;
+
     void Update()
     {
         if (!originalObtained)
@@ -20,13 +20,13 @@ public class PressureDoor : MonoBehaviour
             originalObtained = true;
         }
 
-        if(doorOpened)
+        if (doorOpened)
         {
-            MoveDoor(moveSpeed); 
+            MoveDoor(moveSpeed);
         }
         else
         {
-            MoveDoor(-moveSpeed); 
+            MoveDoor(-moveSpeed);
         }
     }
 
@@ -48,6 +48,7 @@ public class PressureDoor : MonoBehaviour
             {
                 if (after >= originalPos)
                 {
+                    AudioManager.instance.Play("PressureDoorOpen", true);
                     gameObject.transform.position = new Vector3(after, gameObject.transform.position.y, gameObject.transform.position.z);
                 }
             }
@@ -55,6 +56,7 @@ public class PressureDoor : MonoBehaviour
             {
                 if (after <= originalPos)
                 {
+                    AudioManager.instance.Play("PressureDoorOpen", true);
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x, after, gameObject.transform.position.z);
                 }
             }
@@ -63,6 +65,6 @@ public class PressureDoor : MonoBehaviour
 
     public void setDoorOpened(bool opened)
     {
-        this.doorOpened = opened; 
+        this.doorOpened = opened;
     }
 }

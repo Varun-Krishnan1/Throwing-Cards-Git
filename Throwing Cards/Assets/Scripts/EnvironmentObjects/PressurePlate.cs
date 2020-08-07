@@ -35,6 +35,7 @@ public class PressurePlate : MonoBehaviour
         Chain chain = collision.gameObject.GetComponent<Chain>(); 
         if(chain != null && pushTimer <= 0)
         {
+            AudioManager.instance.Play("PressurePlate"); 
             chain.rb.AddForce(new Vector2(pushForce, 0), ForceMode2D.Impulse);
             pushTimer = pushTimerTime;
             door.setDoorOpened(true);
