@@ -75,6 +75,7 @@ public class CardWeapon : Weapon
         // -- only start shoot animation if fire rate cooldown time is over 
         if (fireRate <= 0)
         {
+
             animator.SetBool("isShooting", true);
             fireRate = fireRateTime;
             return true;

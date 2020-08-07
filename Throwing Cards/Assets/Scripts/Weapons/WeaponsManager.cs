@@ -196,6 +196,9 @@ public class WeaponsManager : MonoBehaviour
     // -- CALLED DURING WEAPON SHOOTING ANIMATION DO NOT CALL MANUALLY 
     public void ShootWeapon()
     {
+        // -- audio 
+        AudioManager.instance.Play("CardThrow");
+
         Weapon weapon = weapons[selectedWeaponIndex];
         weapon.Shoot();
     }

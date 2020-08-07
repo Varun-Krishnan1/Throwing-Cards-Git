@@ -130,7 +130,11 @@ public class Controller2D : MonoBehaviour
 				rollTime = totalRollTime;
 
 				// -- set roll cooldown timer for how long it takes to do a roll
-				rollCooldownTimer = rollTime; 
+				rollCooldownTimer = rollTime;
+
+				// -- audio 
+				AudioManager.instance.Play("Roll");
+
 			}
 			else
             {
@@ -187,6 +191,7 @@ public class Controller2D : MonoBehaviour
 		this.gameObject.layer = LayerMask.NameToLayer("PlayerRolling");
 		float fHorizontalVelocity = m_Rigidbody2D.velocity.x;
 		animator.SetBool("isRolling", true);
+
 
 		if (this.isFacingRight())
         {

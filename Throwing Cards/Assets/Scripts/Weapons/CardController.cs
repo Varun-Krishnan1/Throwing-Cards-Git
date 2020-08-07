@@ -52,6 +52,7 @@ public class CardController : MonoBehaviour
     /* THIS IS OVERRIDEN BY CANE CONTROLLER SO WHATEVER YOU ADD HERE MAKE SURE TO ADD TO CANE CONTROLLER START METHOD */ 
     protected virtual void Start()          
     {
+
         rb.velocity = transform.right * speed;
         // -- get original collider size 
         col = this.GetComponent<BoxCollider2D>();
@@ -158,6 +159,14 @@ public class CardController : MonoBehaviour
             if (hitInfo.tag == "InteractableObject" || hitInfo.tag == "Enemy")
             {
                 ScreenShakeAndParticleImpactEffect(contact, true); 
+            }
+            else if(hitInfo.tag == "RoomGrid")
+            {
+                AudioManager.instance.Play("CardHit"); 
+            }
+            else
+            {
+                AudioManager.instance.Play("CardHitCard");
             }
 
             // -- stop particle trail 
