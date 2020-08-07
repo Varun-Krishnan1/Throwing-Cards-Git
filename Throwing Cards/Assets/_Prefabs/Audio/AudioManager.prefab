@@ -81,14 +81,44 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: CardThrow
-    clip: {fileID: 8300000, guid: ee4f48a33626101458965d218e90c87b, type: 3}
+    clip: {fileID: 8300000, guid: 6934f5d442b40c84b81f112ba6da4f41, type: 3}
     volume: 0.5
     pitch: 0.8
     loop: 0
     source: {fileID: 0}
   - name: WallSlide
-    clip: {fileID: 8300000, guid: f86f0d7c10301894bb8fef968bc34b13, type: 3}
+    clip: {fileID: 8300000, guid: dc8078b378b2b8e44bd73079dc519bd0, type: 3}
     volume: 0.5
     pitch: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - name: PickupItem
+    clip: {fileID: 8300000, guid: f2b995e05c4ab1b49992ddd65a7227ff, type: 3}
+    volume: 1
+    pitch: 1.05
+    loop: 0
+    source: {fileID: 0}
+  - name: Freeze
+    clip: {fileID: 8300000, guid: 8667c97b168d9b544bbff8e837c0f091, type: 3}
+    volume: 0.75
+    pitch: 1.05
+    loop: 0
+    source: {fileID: 0}
+  - name: UnFreeze
+    clip: {fileID: 8300000, guid: e5258e42140b5e245a7d5b85cb3237da, type: 3}
+    volume: 0.75
+    pitch: 1.05
+    loop: 0
+    source: {fileID: 0}
+  - name: EnemyHitZone
+    clip: {fileID: 8300000, guid: 9369a15626f07414ea895eec54d0540e, type: 3}
+    volume: 0.75
+    pitch: 1.05
+    loop: 0
+    source: {fileID: 0}
+  - name: EnemyMetal
+    clip: {fileID: 8300000, guid: 0c9a3f463ac26984db96d1e0c52a5317, type: 3}
+    volume: 0.75
+    pitch: 1.05
     loop: 0
     source: {fileID: 0}

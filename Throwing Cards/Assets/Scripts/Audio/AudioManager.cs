@@ -52,7 +52,29 @@ public class AudioManager : MonoBehaviour
             return; 
         }
 
-        if(!s.source.isPlaying)
+
+        s.source.Play();
+        print("Playing: " + name);
+
+    }
+
+
+    public void Play(string name, bool dontOverlap)
+    {
+
+
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.volume = s.volume;
+        s.source.pitch = s.pitch;
+
+
+        if (s == null)
+        {
+            UnityEngine.Debug.LogError("Audio clip not found: " + name);
+            return;
+        }
+
+        if (dontOverlap && !s.source.isPlaying)
         {
             s.source.Play();
             print("Playing: " + name);

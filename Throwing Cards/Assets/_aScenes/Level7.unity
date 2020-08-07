@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 180482837}
   m_Layer: 0
   m_Name: Tilemap_Floors
-  m_TagString: Untagged
+  m_TagString: RoomGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -826,7 +826,7 @@ GameObject:
   - component: {fileID: 523037523}
   m_Layer: 0
   m_Name: Tilemap_Outside
-  m_TagString: Untagged
+  m_TagString: RoomGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22175,6 +22175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 5357697165916709648, guid: aabe0f62e0b06f240802872edc6b376a,
     type: 3}
+  audioManager: {fileID: 0}
 --- !u!114 &668087077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22596,7 +22597,7 @@ GameObject:
   - component: {fileID: 799433334}
   m_Layer: 9
   m_Name: Tilemap_Walls
-  m_TagString: Untagged
+  m_TagString: RoomGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23549,7 +23550,7 @@ GameObject:
   - component: {fileID: 1091517112}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: RoomGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23770,7 +23771,7 @@ GameObject:
   - component: {fileID: 1462080738}
   m_Layer: 0
   m_Name: Tilemap_Inside
-  m_TagString: Untagged
+  m_TagString: RoomGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

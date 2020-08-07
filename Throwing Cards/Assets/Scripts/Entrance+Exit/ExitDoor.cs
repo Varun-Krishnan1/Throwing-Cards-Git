@@ -73,7 +73,7 @@ public class ExitDoor : MonoBehaviour
             {
                  if(after >= originalPos)
                  {
-                    AudioManager.instance.Play("DoorOpen"); 
+                    AudioManager.instance.Play("DoorOpen", true);
                     gameObject.transform.position = new Vector3(after, gameObject.transform.position.y, gameObject.transform.position.z);
                     return; 
                  }
@@ -82,7 +82,7 @@ public class ExitDoor : MonoBehaviour
             {
                 if (after <= originalPos)
                 {
-                    AudioManager.instance.Play("DoorOpen");
+                    AudioManager.instance.Play("DoorOpen", true);
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x, after, gameObject.transform.position.z);
                     return; 
                 }

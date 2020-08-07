@@ -137,6 +137,7 @@ public class CardController : MonoBehaviour
         // -- if hit enemy 
         if (enemyHit != null && !hitObject)
         {
+            AudioManager.instance.Play("EnemyHitZone"); 
             ScreenShakeAndParticleImpactEffect(contact, true);
 
             EnemyController enemy = enemyHit.transform.parent.GetComponent<EnemyController>(); 
@@ -158,6 +159,7 @@ public class CardController : MonoBehaviour
             // -- if hits interactable object add screen shake and particle impact effect 
             if (hitInfo.tag == "InteractableObject" || hitInfo.tag == "Enemy")
             {
+                AudioManager.instance.Play("EnemyMetal");
                 ScreenShakeAndParticleImpactEffect(contact, true); 
             }
             else if(hitInfo.tag == "RoomGrid")

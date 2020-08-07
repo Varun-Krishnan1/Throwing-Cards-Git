@@ -10,6 +10,7 @@ public class SilkToCanePickup : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" && !triggered)
         {
+            AudioManager.instance.Play("PickupItem"); 
             triggered = true;
 
             // -- add weapon to weapons array

@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 205464429}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: RoomGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 747991287}
   m_Layer: 0
   m_Name: Tilemap_Inside
-  m_TagString: Untagged
+  m_TagString: RoomGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29951,7 +29951,7 @@ GameObject:
   - component: {fileID: 813962014}
   m_Layer: 9
   m_Name: Tilemap_Walls
-  m_TagString: Untagged
+  m_TagString: RoomGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31261,7 +31261,7 @@ GameObject:
   - component: {fileID: 1313601910}
   m_Layer: 0
   m_Name: Tilemap_Floors
-  m_TagString: Untagged
+  m_TagString: RoomGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32029,6 +32029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 5357697165916709648, guid: aabe0f62e0b06f240802872edc6b376a,
     type: 3}
+  audioManager: {fileID: 0}
 --- !u!114 &1495086067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32346,7 +32347,7 @@ GameObject:
   - component: {fileID: 1588288756}
   m_Layer: 0
   m_Name: Tilemap_Outside
-  m_TagString: Untagged
+  m_TagString: RoomGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

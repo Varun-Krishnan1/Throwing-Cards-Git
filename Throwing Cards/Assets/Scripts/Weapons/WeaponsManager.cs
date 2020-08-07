@@ -270,6 +270,7 @@ public class WeaponsManager : MonoBehaviour
                 CardController cardController = card.GetComponent<CardController>();
                 if (cardController.isMoving())
                 {
+                    AudioManager.instance.Play("Freeze");
                     cardController.Freeze();
                     anyCardsMoving = true;
                 }
@@ -283,6 +284,7 @@ public class WeaponsManager : MonoBehaviour
                 {
                     foreach (GameObject card in thrownObjects)
                     {
+                        AudioManager.instance.Play("UnFreeze");
                         /// -- unfreeze objects that are NOT moving 
                         CardController cardController = card.GetComponent<CardController>();
                         cardController.UnFreeze();
@@ -292,6 +294,7 @@ public class WeaponsManager : MonoBehaviour
                 // -- If objects are unfrozen then FREEZE objects 
                 else
                 {
+                    AudioManager.instance.Play("Freeze");
                     foreach (GameObject card in thrownObjects)
                     {
                         // -- freeze objects that are NOT moving 

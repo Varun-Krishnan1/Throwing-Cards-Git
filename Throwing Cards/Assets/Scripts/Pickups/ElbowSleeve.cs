@@ -9,6 +9,8 @@ public class ElbowSleeve : MonoBehaviour
     {
         if(col.gameObject.tag == "Player" && !triggered)
         {
+            AudioManager.instance.Play("PickupItem");
+
             triggered = true; 
 
             col.gameObject.GetComponent<WeaponsManager>().ChangeFireSpeed(2);
