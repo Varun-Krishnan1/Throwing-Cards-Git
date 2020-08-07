@@ -134,3 +134,21 @@ MonoBehaviour:
     pitch: 1.05
     loop: 0
     source: {fileID: 0}
+  - name: GlassShatter
+    clip: {fileID: 8300000, guid: 48b1b33bda034114fa72f3966267b4cb, type: 3}
+    volume: 1
+    pitch: 1.05
+    loop: 0
+    source: {fileID: 0}
+  - name: Motor
+    clip: {fileID: 8300000, guid: e41b1f28c7054344a9c6218e2702588d, type: 3}
+    volume: 0.5
+    pitch: 1.05
+    loop: 0
+    source: {fileID: 0}
+  - name: EnemyTurn
+    clip: {fileID: 8300000, guid: e82460a3a1fd8f1438fe53ef8e74ef4d, type: 3}
+    volume: 0.5
+    pitch: 1.05
+    loop: 0
+    source: {fileID: 0}

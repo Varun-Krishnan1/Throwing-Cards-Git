@@ -9,8 +9,9 @@ public class LightbulbFalling : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.tag == "Floor")
+        if(col.gameObject.tag == "RoomGrid")
         {
+            AudioManager.instance.Play("GlassShatter"); 
             animator.SetBool("hasBeenHit", true); 
         }
     }

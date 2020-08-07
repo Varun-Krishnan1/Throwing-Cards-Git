@@ -105,6 +105,8 @@ public class EnemyController : MonoBehaviour
                     {
                         state = State.Charging;
                         currentChargingTime = chargingTime;
+
+                        AudioManager.instance.Play("Motor"); 
                     }
 
                     break;
@@ -173,6 +175,7 @@ public class EnemyController : MonoBehaviour
                 dir = Vector2.right;
             }
 
+            AudioManager.instance.Play("Motor");
             return true;
         }
 
