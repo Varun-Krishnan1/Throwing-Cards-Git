@@ -152,3 +152,21 @@ MonoBehaviour:
     pitch: 1.05
     loop: 0
     source: {fileID: 0}
+  - name: Tutorial
+    clip: {fileID: 8300000, guid: 1e023b7a6872e9449b440152a8d776a3, type: 3}
+    volume: 0.5
+    pitch: 1.05
+    loop: 1
+    source: {fileID: 0}
+  - name: EnemyTutorialTheme
+    clip: {fileID: 8300000, guid: 59b8672e826f6d54ab1d1ae58d497212, type: 3}
+    volume: 0.5
+    pitch: 1.05
+    loop: 1
+    source: {fileID: 0}
+  - name: CorridorTheme
+    clip: {fileID: 8300000, guid: e7dda16478fbd8b47a45a5e2759c77fe, type: 3}
+    volume: 0.5
+    pitch: 1.05
+    loop: 1
+    source: {fileID: 0}

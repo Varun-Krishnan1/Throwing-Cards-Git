@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     public LayerMask playerMask;
     public float playerCheckDistance;
     public Transform playerCheckPosition;
+    public float playerSightDistance; 
     public float moveSpeedWhileCharging;
     public float chargingTime;
     public Collider2D headCollider;
@@ -100,7 +101,7 @@ public class EnemyController : MonoBehaviour
                     }
 
                     /* Charge if player in line of sight */
-                    RaycastHit2D playerChargeInfo = Physics2D.Raycast(playerCheckPosition.position, dir, Mathf.Infinity, playerMask);
+                    RaycastHit2D playerChargeInfo = Physics2D.Raycast(playerCheckPosition.position, dir, playerSightDistance, playerMask);
                     if (playerChargeInfo.collider != null && !charging)
                     {
                         state = State.Charging;
@@ -175,7 +176,7 @@ public class EnemyController : MonoBehaviour
                 dir = Vector2.right;
             }
 
-            AudioManager.instance.Play("Motor");
+            AudioManager.instance.Play("EnemyTurn");
             return true;
         }
 

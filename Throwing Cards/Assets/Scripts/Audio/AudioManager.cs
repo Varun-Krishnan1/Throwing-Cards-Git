@@ -32,11 +32,29 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void Start()
+    // -- controls theme based on levels 
+    public void PlayTheme(int level)
     {
-        //Play("MainTheme"); 
+        // - new theme on levels 1, 2, 4, 7(no music here on out) 
+        if(level == 1)
+        {
+            Play("Tutorial"); 
+        }
+        else if(level == 2)
+        {
+            Stop("Tutorial");
+            Play("CorridorTheme"); 
+        }
+        else if(level == 4)
+        {
+            Stop("CorridorTheme");
+            Play("EnemyTutorialTheme");
+        }
+        else if(level == 7)
+        {
+            Stop("EnemyTutorialTheme"); 
+        }
     }
-
     public void Play(string name)
     {
 

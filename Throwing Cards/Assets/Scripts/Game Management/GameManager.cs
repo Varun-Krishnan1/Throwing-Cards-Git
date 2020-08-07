@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
     public void LoadNextScene()
     {
         level += 1;
+
+        AudioManager.instance.PlayTheme(level); 
         // -- assumes order is based on order in the Scene enum 
         this.LoadScene(level);
     }
