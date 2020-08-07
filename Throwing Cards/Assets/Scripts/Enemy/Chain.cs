@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Media;
-using System.Threading;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Chain : MonoBehaviour
 {
