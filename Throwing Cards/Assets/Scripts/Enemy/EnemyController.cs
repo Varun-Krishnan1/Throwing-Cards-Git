@@ -154,8 +154,13 @@ public class EnemyController : MonoBehaviour
         /* Rotate if hit wall or end of platform */
         RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, checkDistance, groundMask);
         RaycastHit2D wallInfo = Physics2D.Raycast(groundDetection.position, dir, checkDistance, wallMask);
-        if ((groundInfo.collider == false || wallInfo.collider == true) && wallInfo.transform.gameObject.tag != "ThrownPlayerCard")
+        if ((groundInfo.collider == false || wallInfo.collider == true)) 
         {
+            if (wallInfo.transform != null && wallInfo.transform.gameObject.tag == "ThrownPlayerCard")
+            {
+                return false; 
+            }
+
             print("Rotate called");
             transform.Rotate(0, 180f, 0);
             movingRight = !movingRight;
@@ -168,10 +173,10 @@ public class EnemyController : MonoBehaviour
                 dir = Vector2.right;
             }
 
-            return true; 
+            return true;
         }
 
-        return false; 
+        return false;
     }
 
     void Move(float moveSpeed)
