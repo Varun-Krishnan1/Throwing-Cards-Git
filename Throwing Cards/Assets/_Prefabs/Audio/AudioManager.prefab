@@ -46,25 +46,49 @@ MonoBehaviour:
   sounds:
   - name: Roll
     clip: {fileID: 8300000, guid: c2c04f7a5ace07449bc5b3111b1d4e54, type: 3}
-    volume: 0.388
+    volume: 0.5
     pitch: 1.24
     loop: 0
     source: {fileID: 0}
   - name: CardHit
     clip: {fileID: 8300000, guid: 992ca81329053c445ab844600a9a31c1, type: 3}
-    volume: 0.388
+    volume: 0.5
     pitch: 1.24
     loop: 0
     source: {fileID: 0}
   - name: CardHitCard
     clip: {fileID: 8300000, guid: 22f7fad13c683b749a268b20e0412e86, type: 3}
-    volume: 0.388
+    volume: 0.5
     pitch: 0.73
+    loop: 0
+    source: {fileID: 0}
+  - name: KeyGrab
+    clip: {fileID: 8300000, guid: 244c053099a509f41aa8e2a12060530d, type: 3}
+    volume: 1
+    pitch: 0.36
+    loop: 0
+    source: {fileID: 0}
+  - name: DoorOpen
+    clip: {fileID: 8300000, guid: 2cac753eb24cf1c418aa264aa694c87d, type: 3}
+    volume: 0.5
+    pitch: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - name: PauseMenu
+    clip: {fileID: 8300000, guid: 7f946c969cb24ea4e8d640b156e6c452, type: 3}
+    volume: 0.5
+    pitch: 0.8
     loop: 0
     source: {fileID: 0}
   - name: CardThrow
     clip: {fileID: 8300000, guid: ee4f48a33626101458965d218e90c87b, type: 3}
-    volume: 0.388
+    volume: 0.5
+    pitch: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - name: WallSlide
+    clip: {fileID: 8300000, guid: f86f0d7c10301894bb8fef968bc34b13, type: 3}
+    volume: 0.5
     pitch: 0.8
     loop: 0
     source: {fileID: 0}

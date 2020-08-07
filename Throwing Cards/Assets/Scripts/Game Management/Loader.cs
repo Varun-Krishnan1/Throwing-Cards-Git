@@ -13,10 +13,10 @@ public class Loader : MonoBehaviour
         {
             Instantiate(gameManager);
         }
-        //if(AudioManager.instance == null)
-        //{
-        //    Instantiate(audioManager); 
-        //}
+        if (AudioManager.instance == null)
+        {
+            Instantiate(audioManager);
+        }
     }
 
 }

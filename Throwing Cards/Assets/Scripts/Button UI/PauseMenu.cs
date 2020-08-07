@@ -22,6 +22,7 @@ public class PauseMenu : MonoBehaviour
         // -- allow for pausing with esc 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            AudioManager.instance.Play("PauseMenu"); 
             if(gameIsPaused)
             {
                 Resume(); 

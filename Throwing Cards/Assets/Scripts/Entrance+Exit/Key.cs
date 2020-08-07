@@ -11,6 +11,7 @@ public class Key : MonoBehaviour
     {
         if(col.gameObject.tag == "Player" && !triggered)
         {
+            AudioManager.instance.Play("KeyGrab"); 
             triggered = true;
 
             door.AddKey();

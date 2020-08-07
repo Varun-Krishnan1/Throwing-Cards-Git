@@ -32,17 +32,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        // -- REMOVE AFTER TESTING -- 
-        foreach(Sound s in sounds)
-        {
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-        }
-
-
-    }
     void Start()
     {
         //Play("MainTheme"); 
@@ -50,12 +39,37 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
+
+
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        if(s==null)
+        s.source.volume = s.volume;
+        s.source.pitch = s.pitch;
+
+
+        if (s==null)
         {
             UnityEngine.Debug.LogError("Audio clip not found: " + name); 
             return; 
         }
-        s.source.Play(); 
+
+        if(!s.source.isPlaying)
+        {
+            s.source.Play();
+            print("Playing: " + name);
+        }
+
     }
+
+    public void Stop(string sound)
+    {
+        Sound s = Array.Find(sounds, item => item.name == sound);
+        if (s == null)
+        {
+            UnityEngine.Debug.LogError("Sound: " + name + " not found!");
+            return;
+        }
+
+        s.source.Stop(); 
+    }
+
 }

@@ -244,6 +244,7 @@ public class Controller2D : MonoBehaviour
 
 		if(isWallSliding)
         {
+			AudioManager.instance.Play("WallSlide"); 
 			animator.SetBool("isWallSliding", true);
 			animator.SetBool("isJumping", false);
 

@@ -73,20 +73,26 @@ public class ExitDoor : MonoBehaviour
             {
                  if(after >= originalPos)
                  {
+                    AudioManager.instance.Play("DoorOpen"); 
                     gameObject.transform.position = new Vector3(after, gameObject.transform.position.y, gameObject.transform.position.z);
+                    return; 
                  }
             }
             else
             {
                 if (after <= originalPos)
                 {
+                    AudioManager.instance.Play("DoorOpen");
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x, after, gameObject.transform.position.z);
+                    return; 
                 }
             }
         }
+
+        //AudioManager.instance.Stop("DoorOpen");
     }
 
-    /* Called by Key */ 
+    /* Called by Key */
     public void AddKey()
     {
         this.numKeys += 1;
