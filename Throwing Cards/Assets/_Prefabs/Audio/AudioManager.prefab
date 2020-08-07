@@ -124,7 +124,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: PressurePlate
     clip: {fileID: 8300000, guid: 9e72716e8c1f0494782314f4c4874cb1, type: 3}
-    volume: 0.75
+    volume: 0.4
     pitch: 1.05
     loop: 0
     source: {fileID: 0}
@@ -166,6 +166,18 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: CorridorTheme
     clip: {fileID: 8300000, guid: e7dda16478fbd8b47a45a5e2759c77fe, type: 3}
+    volume: 0.5
+    pitch: 1.05
+    loop: 1
+    source: {fileID: 0}
+  - name: DramaticThemeOne
+    clip: {fileID: 8300000, guid: defad3081708ad14085a458b442e68bf, type: 3}
+    volume: 0.5
+    pitch: 1.05
+    loop: 1
+    source: {fileID: 0}
+  - name: DramaticThemeTwo
+    clip: {fileID: 8300000, guid: f405de72bd7b4bb4387d02a9c59ebe7c, type: 3}
     volume: 0.5
     pitch: 1.05
     loop: 1

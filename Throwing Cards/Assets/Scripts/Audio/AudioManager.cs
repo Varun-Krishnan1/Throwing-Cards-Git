@@ -35,6 +35,7 @@ public class AudioManager : MonoBehaviour
     // -- controls theme based on levels 
     public void PlayTheme(int level)
     {
+        print(level); 
         // - new theme on levels 1, 2, 4, 7(no music here on out) 
         if(level == 1)
         {
@@ -52,7 +53,21 @@ public class AudioManager : MonoBehaviour
         }
         else if(level == 7)
         {
-            Stop("EnemyTutorialTheme"); 
+            Stop("EnemyTutorialTheme");
+            Play("DramaticThemeOne"); 
+        }
+        else if(level == 10)
+        {
+            Stop("DramaticThemeOne"); 
+        }
+        // -- level 9 must be silent 
+        else if(level == 11)
+        {
+            Play("DramaticThemeTwo");  
+        }
+        else if(level == 12)
+        {
+            Stop("DramaticThemeTwo");
         }
     }
     public void Play(string name)
