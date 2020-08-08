@@ -165,7 +165,7 @@ public class CaneController : CardController
             }
         }
 
-
+        AudioManager.instance.Play("Explosion"); 
 
     }
 
