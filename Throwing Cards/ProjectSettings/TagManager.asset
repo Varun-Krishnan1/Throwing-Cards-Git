@@ -12,6 +12,7 @@ TagManager:
   - Floor
   - RoomGrid
   - MainCanvas
+  - DeathScreen
   layers:
   - Default
   - TransparentFX

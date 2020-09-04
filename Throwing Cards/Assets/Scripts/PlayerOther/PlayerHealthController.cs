@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerHealthController : MonoBehaviour
 {
 
-    public int health = 100; 
+    public int health = 100;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        Dialogue.instance.Alive();
     }
 
     // Update is called once per frame
@@ -31,6 +31,7 @@ public class PlayerHealthController : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        Dialogue.instance.Death();
+        Destroy(gameObject); 
     }
 }

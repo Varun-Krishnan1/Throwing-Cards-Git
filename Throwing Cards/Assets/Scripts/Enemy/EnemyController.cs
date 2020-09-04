@@ -176,7 +176,7 @@ public class EnemyController : MonoBehaviour
                 dir = Vector2.right;
             }
 
-            AudioManager.instance.Play("EnemyTurn");
+            //AudioManager.instance.Play("EnemyTurn");
             return true;
         }
 

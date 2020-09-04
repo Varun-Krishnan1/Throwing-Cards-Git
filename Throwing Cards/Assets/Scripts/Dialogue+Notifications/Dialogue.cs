@@ -12,8 +12,8 @@ public class Dialogue : MonoBehaviour
     public float wpm;
     public float timeOnScreenPerWord;
     public float extraTimeOnScreen; 
-    public Animator textAnimator; 
-
+    public Animator textAnimator;
+    public GameObject deathScreen; 
 
 
     private Queue<string> curSentences;
@@ -93,6 +93,16 @@ public class Dialogue : MonoBehaviour
     public void AddSentence(string sentence)
     {
         curSentences.Enqueue(sentence); 
+    }
+
+    public void Death()
+    {
+        deathScreen.SetActive(true); 
+    }
+
+    public void Alive()
+    {
+        deathScreen.SetActive(false); 
     }
 
 }
