@@ -7,14 +7,16 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public static bool gameIsPaused = false;
 
+    private string cheatWord = "";
+
     void Update()
     {
         // -- allow reloading of scene with r 
         if (Input.GetKeyDown("r"))
         {
-            if(gameIsPaused)
+            if (gameIsPaused)
             {
-                Resume(); 
+                Resume();
             }
             GameManager.instance.ReloadScene();
         }
@@ -22,27 +24,44 @@ public class PauseMenu : MonoBehaviour
         // -- allow for pausing with esc 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            AudioManager.instance.Play("PauseMenu"); 
-            if(gameIsPaused)
+            AudioManager.instance.Play("PauseMenu");
+            if (gameIsPaused)
             {
-                Resume(); 
+                Resume();
             }
             else
             {
-                Pause(); 
+                Pause();
             }
         }
-        
+
         // -- allow for quitting with q 
-        if(gameIsPaused)
+        if (gameIsPaused)
         {
             if (Input.GetKeyDown("q"))
             {
-                Resume(); 
+                Resume();
                 // -- go to start menu 
-                GameManager.instance.LoadScene(0); 
+                GameManager.instance.LoadScene(0);
             }
         }
+
+        // -- allow skipping of level with Lea 
+        if (Input.GetKeyDown("l") && cheatWord == "")
+        {
+            cheatWord = "l";
+        }
+        else if (Input.GetKeyDown("e") && cheatWord == "l")
+        {
+            cheatWord += "e";
+        }
+        else if(Input.GetKeyDown("a") && cheatWord == "le")
+        {
+            // -- CHEAT WORD WRITTEN! 
+            GameManager.instance.SavePlayer(GameObject.FindWithTag("Player"));
+            GameManager.instance.LoadNextScene();
+        }
+        print(cheatWord); 
     }
 
     void Resume()
@@ -56,6 +75,9 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
-        gameIsPaused = true; 
+        gameIsPaused = true;
+
+        // -- reset cheat word on pause 
+        cheatWord = ""; 
     }
 }

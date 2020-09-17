@@ -23,11 +23,4 @@ public class Chain : MonoBehaviour
         rb.AddForce(new Vector2(force, force)); 
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Player" && (rb.velocity.x > minHitSpeed || rb.velocity.y > minHitSpeed))
-        {
-            collision.gameObject.GetComponent<PlayerHealthController>().TakeDamage(100);
-        }
-    }
 }
