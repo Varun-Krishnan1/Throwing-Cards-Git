@@ -61,7 +61,6 @@ public class PauseMenu : MonoBehaviour
             GameManager.instance.SavePlayer(GameObject.FindWithTag("Player"));
             GameManager.instance.LoadNextScene();
         }
-        print(cheatWord); 
     }
 
     void Resume()
